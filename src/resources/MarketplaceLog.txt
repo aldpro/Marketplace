@@ -1,0 +1,54 @@
+oct 29, 2021 2:47:56 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion,2021-10-29
+oct 29, 2021 3:09:33 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:10:01 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:11:53 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:15:44 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:16:53 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:17:30 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:19:13 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:19:34 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 29, 2021 3:20:30 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-29
+oct 30, 2021 6:10:48 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-30
+oct 30, 2021 6:11:46 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: crear producto,El producto se ha creado con éxito,2021-10-30
+oct 30, 2021 6:11:57 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-30
+oct 30, 2021 6:48:52 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-30
+oct 31, 2021 11:53:17 AM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:09:24 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:10:11 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:11:09 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:19:55 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:38:29 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:53:44 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:55:02 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 1:58:56 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 2:00:06 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 2:01:56 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 2:04:39 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+oct 31, 2021 2:05:24 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
