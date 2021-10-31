@@ -1,3 +1,0 @@
-Alfombra,D:\Proyecto final\Info\alfombra.jpg,Hogar,Usuario1,123,20000.0,PUBLICADO
-Aspiradora,D:\Proyecto final\Info\aspiradora.jpg,Hogar,Usuario12,1234,30000.0,VENDIDO
-Martillo,D:\Proyecto final\Info\12781927-martillo-de-madera-herramienta-de-carpintería.jpg,Herramientas,Usuario123,1234,40000.0,CANCELADO

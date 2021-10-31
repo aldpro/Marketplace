@@ -399,7 +399,7 @@ public class MarketplaceViewController {
 	}
 	
 	
-	private boolean datosValidos(String nombre, String categoria,  Double precio, EstadoProducto estadoProducto, String pathImagen) {
+	private boolean validarDatosProducto(String nombre, String categoria,  Double precio, EstadoProducto estadoProducto, String pathImagen) {
 
 		String mensaje = "";
 
@@ -437,7 +437,7 @@ public class MarketplaceViewController {
     	EstadoProducto estadoProducto = cbEstadoProducto.getValue();
     	
     	//2. Validar la información
-    	if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
+    	if (validarDatosProducto(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
     		
     		Producto producto = null;
     		producto = crudProductoViewController.crearProducto(nombre, categoria, precio, estadoProducto, pathImagen);
@@ -501,7 +501,7 @@ public class MarketplaceViewController {
     	if(productoSeleccionado != null) {
     		
         	//3. Validar la información
-        	if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
+        	if (validarDatosProducto(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
         		
         		productoActualizado = crudProductoViewController.actualizarProducto(productoSeleccionado.getNombre(), nombre, categoria, precio, estadoProducto);
         		
@@ -535,7 +535,7 @@ public class MarketplaceViewController {
     	String direccion = txtDireccionVendedor.getText();
     	
     	//2. Validar la información
-    	if (datosValidos(nombre, apellido, cedula, direccion) == true) {
+    	if (ValidardatosVendedor(nombre, apellido, cedula, direccion) == true) {
     		
     		Vendedor vendedor = null;
     		vendedor = crudProductoViewController.crearVendedor(nombre, apellido, cedula, direccion);
@@ -545,7 +545,7 @@ public class MarketplaceViewController {
 //    			crudProductoViewController.guardarDatos();
 //    			crudProductoViewController.registrarAccion("El producto se ha creado con éxito",1,"crear producto");
     			mostrarMensaje("Notificación de vendedor", "Vendedor creado", "El Vendedor se ha creado con éxito", AlertType.INFORMATION);
-    			limpiarCamposProducto();
+    			limpiarCamposVendedor();
     		}else {
     			mostrarMensaje("Notificación de vendedor", "Vendedor no creado", "El vendedor no se ha creado con éxito", AlertType.INFORMATION);
     		}
@@ -556,7 +556,16 @@ public class MarketplaceViewController {
     	
 	}
 
-	private boolean datosValidos(String nombre, String apellido, String cedula, String direccion) {
+	private void limpiarCamposVendedor() {
+		// TODO Auto-generated method stub
+		txtNombreVendedor.setText("");
+		txtApellidoVendedor.setText("");
+		txtCedulaVendedor.setText("");
+		txtDireccionVendedor.setText("");
+		
+	}
+
+	private boolean ValidardatosVendedor(String nombre, String apellido, String cedula, String direccion) {
 		
 		String mensaje = "";
 	

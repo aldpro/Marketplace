@@ -23,13 +23,13 @@ import co.edu.uniquindio.marketplace.model.Usuario;
 
 public class Persistencia {
 
-	public static final String RUTA_ARCHIVO_PRODUCTOS = "src/resources/archivoProductos.txt";
-	public static final String RUTA_ARCHIVO_EMPLEADOS = "src/resources/archivoEmpleados.txt";
+	public static final String RUTA_ARCHIVO_PRODUCTOS = "C:\\td\\persistencia\\archivos\\archivoProductos.txt";
+	public static final String RUTA_ARCHIVO_VENDEDORES = "C:\\td\\persistencia\\archivos\\archivoVendedores.txt";
 //	public static final String RUTA_ARCHIVO_USUARIOS = "src/resources/archivoUsuarios.txt";
-	public static final String RUTA_ARCHIVO_LOG = "src/resources/MarketplaceLog.txt";
+	public static final String RUTA_ARCHIVO_LOG = "C:\\td\\persistencia\\log\\MarketplaceLog.txt";
 //	public static final String RUTA_ARCHIVO_OBJETOS = "src/resources/archivoObjetos.txt";
-	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_BINARIO = "src/resources/model.dat";
-	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_XML = "src/resources/model.xml";
+	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_BINARIO = "C:\\td\\persistencia\\model.dat";
+	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_XML = "C:\\td\\persistencia\\model.xml";
 
 
 
