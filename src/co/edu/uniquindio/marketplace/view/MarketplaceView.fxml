@@ -100,7 +100,7 @@
                                                       <Label layoutX="10.0" layoutY="170.0" text="Imagen:" />
                                                    </children>
                                                 </VBox>
-                                                <Button fx:id="btnAñadirProducto" layoutX="185.0" layoutY="359.0" mnemonicParsing="false" onAction="#añadirProductoAction" text="Añadir producto" />
+                                                <Button fx:id="btnAddProducto" layoutX="185.0" layoutY="359.0" mnemonicParsing="false" onAction="#addProductoAction" text="Añadir producto" />
                                                 <Button fx:id="btnActualizarProducto" layoutX="361.0" layoutY="359.0" mnemonicParsing="false" onAction="#actualizarProductoAction" text="Actualizar producto" />
                                                 <Button fx:id="btnEliminarProducto" layoutX="534.0" layoutY="285.0" mnemonicParsing="false" onAction="#eliminarProductoAction" text="Eliminar producto" />
                                                 <Separator layoutX="-2.0" layoutY="323.0" prefHeight="2.0" prefWidth="791.0" />

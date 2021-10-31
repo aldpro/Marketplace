@@ -115,14 +115,14 @@ public  class ArchivoUtil {
 
 		String diaN = "";
 		String mesN = "";
-		String añoN = "";
+		String yearN = "";
 
 		Calendar cal1 = Calendar.getInstance();
 
 
 		int  dia = cal1.get(Calendar.DATE);
 		int mes = cal1.get(Calendar.MONTH)+1;
-		int año = cal1.get(Calendar.YEAR);
+		int year = cal1.get(Calendar.YEAR);
 		int hora = cal1.get(Calendar.HOUR);
 		int minuto = cal1.get(Calendar.MINUTE);
 
@@ -140,16 +140,16 @@ public  class ArchivoUtil {
 			mesN+=""+mes;
 		}
 
-		//		fecha_Actual+= año+"-"+mesN+"-"+ diaN;
-		//		fechaSistema = año+"-"+mesN+"-"+diaN+"-"+hora+"-"+minuto;
-		fechaSistema = año+"-"+mesN+"-"+diaN;
+		//		fecha_Actual+= aï¿½o+"-"+mesN+"-"+ diaN;
+		//		fechaSistema = aï¿½o+"-"+mesN+"-"+diaN+"-"+hora+"-"+minuto;
+		fechaSistema = year+"-"+mesN+"-"+diaN;
 		//		horaFechaSistema = hora+"-"+minuto;
 	}
 
 	
 	
 	
-	//------------------------------------SERIALIZACIÓN  y XML
+	//------------------------------------SERIALIZACIï¿½N  y XML
 	/**
 	 * Escribe en el fichero que se le pasa el objeto que se le envia
 	 * 

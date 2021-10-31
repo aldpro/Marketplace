@@ -80,7 +80,7 @@ public class MarketplaceViewController {
     private Button btnFotoPerfil;
     
     @FXML
-    private Button btnAñadirProducto;
+    private Button btnAddProducto;
 
     @FXML
     private Button btnActualizarProducto;
@@ -127,15 +127,11 @@ public class MarketplaceViewController {
     @FXML
     private TableColumn<Producto, String> clEstadoProducto;
 
-    @FXML
-    private TableColumn<Producto, String> clImagenProducto;
 
-
-
-	//CREAR- AÑADIR PRODUCTO-----------------------------------------------------------------------------------------------------------
+	//CREAR- Aï¿½ADIR PRODUCTO-----------------------------------------------------------------------------------------------------------
     
     @FXML
-    void añadirProductoAction(ActionEvent event) {
+    void addProductoAction(ActionEvent event) {
     	crearProducto();
     }
 	
@@ -211,7 +207,6 @@ public class MarketplaceViewController {
 	private void inicializarProductoView() {
 		this.clCategoriaProducto.setCellValueFactory(new PropertyValueFactory<>("categoria"));
 		this.clEstadoProducto.setCellValueFactory(new PropertyValueFactory<>("estadoProducto"));
-		this.clImagenProducto.setCellValueFactory(new PropertyValueFactory<>("imagen"));
 		this.clNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 		this.clPrecioProducto.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		cbEstadoProducto.getItems().addAll(EstadoProducto.CANCELADO, EstadoProducto.PUBLICADO, EstadoProducto.VENDIDO);
@@ -337,7 +332,7 @@ public class MarketplaceViewController {
 
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setHeaderText(null);
-		alert.setTitle("Confirmación");
+		alert.setTitle("Confirmaciï¿½n");
 		alert.setContentText(mensaje);
 		Optional<ButtonType> action = alert.showAndWait();
 
@@ -373,7 +368,7 @@ public class MarketplaceViewController {
 		if(mensaje.equals("")){
 			return true;
 		}else{
-			mostrarMensaje("Notificación Producto","Datos invalidos",mensaje, AlertType.WARNING);
+			mostrarMensaje("Notificaciï¿½n Producto","Datos invalidos",mensaje, AlertType.WARNING);
 			return false;
 		}
 	}
@@ -386,7 +381,7 @@ public class MarketplaceViewController {
     	Double precio = Double.parseDouble(txtPrecioProducto.getText());
     	EstadoProducto estadoProducto = cbEstadoProducto.getValue();
     	
-    	//2. Validar la información
+    	//2. Validar la informaciï¿½n
     	if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
     		
     		Producto producto = null;
@@ -395,14 +390,14 @@ public class MarketplaceViewController {
     		if (producto != null) {
     			listaProductosData.add(producto);
     			crudProductoViewController.guardarDatos();
-    			crudProductoViewController.registrarAccion("El producto se ha creado con éxito",1,"crear producto");
-    			mostrarMensaje("Notificación de producto", "Producto creado", "El producto se ha creado con éxito", AlertType.INFORMATION);
+    			crudProductoViewController.registrarAccion("El producto se ha creado con ï¿½xito",1,"crear producto");
+    			mostrarMensaje("Notificaciï¿½n de producto", "Producto creado", "El producto se ha creado con ï¿½xito", AlertType.INFORMATION);
     			limpiarCamposProducto();
     		}else {
-    			mostrarMensaje("Notificación de producto", "Producto no creado", "El producto no se ha creado con éxito", AlertType.INFORMATION);
+    			mostrarMensaje("Notificaciï¿½n de producto", "Producto no creado", "El producto no se ha creado con ï¿½xito", AlertType.INFORMATION);
     		}
     	}else {
-    			mostrarMensaje("Notificación de producto", "Producto no creado", "Los datos ingresados son inválidos", AlertType.ERROR);
+    			mostrarMensaje("Notificaciï¿½n de producto", "Producto no creado", "Los datos ingresados son invï¿½lidos", AlertType.ERROR);
 
     	}
 	}
@@ -414,7 +409,7 @@ public class MarketplaceViewController {
     	if(productoSeleccionado != null) {
     		
     		
-    		if(mostrarMensajeConfirmacion("¿Está seguro de eliminar el producto seleccionado?")== true) {
+    		if(mostrarMensajeConfirmacion("ï¿½Estï¿½ seguro de eliminar el producto seleccionado?")== true) {
     			
     			productoEliminado = crudProductoViewController.eliminarProducto(productoSeleccionado.getNombre());
     			
@@ -424,16 +419,16 @@ public class MarketplaceViewController {
     				
     				tableProductos.getSelectionModel().clearSelection();
     				limpiarCamposProducto();
-    				mostrarMensaje("Notificación de producto", "Producto eliminado", "El producto se ha eliminado con éxito", AlertType.INFORMATION);
+    				mostrarMensaje("Notificaciï¿½n de producto", "Producto eliminado", "El producto se ha eliminado con ï¿½xito", AlertType.INFORMATION);
     			}else {
-    				mostrarMensaje("Notificación de producto", "Producto no eliminado", "El producto no se puede eliminado con éxito", AlertType.ERROR);
+    				mostrarMensaje("Notificaciï¿½n de producto", "Producto no eliminado", "El producto no se puede eliminado con ï¿½xito", AlertType.ERROR);
     			}
     			
     		}	
     		
     	}else {
     		
-			mostrarMensaje("Notificación de producto", "Producto no seleccionado", "Seleccione un producto de la lista", AlertType.WARNING);	
+			mostrarMensaje("Notificaciï¿½n de producto", "Producto no seleccionado", "Seleccione un producto de la lista", AlertType.WARNING);	
     	}
     	
 	}
@@ -450,7 +445,7 @@ public class MarketplaceViewController {
     	//2. Verificar el producto seleccionado
     	if(productoSeleccionado != null) {
     		
-        	//3. Validar la información
+        	//3. Validar la informaciï¿½n
         	if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
         		
         		productoActualizado = crudProductoViewController.actualizarProducto(productoSeleccionado.getNombre(), nombre, categoria, precio, estadoProducto);
@@ -458,20 +453,20 @@ public class MarketplaceViewController {
         		
         		if (productoActualizado == true) {
         			tableProductos.refresh();
-        			mostrarMensaje("Notificación de producto", "Producto actualizado", "El producto se ha actualizado con éxito", AlertType.INFORMATION);
+        			mostrarMensaje("Notificaciï¿½n de producto", "Producto actualizado", "El producto se ha actualizado con ï¿½xito", AlertType.INFORMATION);
         			limpiarCamposProducto();
         		}else {
-        			mostrarMensaje("Notificación de producto", "Producto no actualizado", "El producto no se ha actualizado con éxito", AlertType.INFORMATION);
+        			mostrarMensaje("Notificaciï¿½n de producto", "Producto no actualizado", "El producto no se ha actualizado con ï¿½xito", AlertType.INFORMATION);
         		}
         	}else {
-    			mostrarMensaje("Notificación de producto", "Producto no actualizado", "Los datos ingresados son inválidos", AlertType.ERROR);
+    			mostrarMensaje("Notificaciï¿½n de producto", "Producto no actualizado", "Los datos ingresados son invï¿½lidos", AlertType.ERROR);
 
         	}
     	}		
 	}
     
     private void nuevoProducto() {
-    	mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <añadir producto>.", AlertType.INFORMATION);
+    	mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <aï¿½adir producto>.", AlertType.INFORMATION);
 		limpiarCamposProducto();
 		
 	}
