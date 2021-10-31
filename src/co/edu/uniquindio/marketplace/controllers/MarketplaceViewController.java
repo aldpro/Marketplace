@@ -211,7 +211,6 @@ public class MarketplaceViewController {
 	private void inicializarProductoView() {
 		this.clCategoriaProducto.setCellValueFactory(new PropertyValueFactory<>("categoria"));
 		this.clEstadoProducto.setCellValueFactory(new PropertyValueFactory<>("estadoProducto"));
-		this.clImagenProducto.setCellValueFactory(new PropertyValueFactory<>("imagen"));
 		this.clNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
 		this.clPrecioProducto.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		cbEstadoProducto.getItems().addAll(EstadoProducto.CANCELADO, EstadoProducto.PUBLICADO, EstadoProducto.VENDIDO);
