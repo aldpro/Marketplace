@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplace.Aplicacion;
 import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -34,8 +35,13 @@ public class VendedorController {
         FilteredList<Producto> filtrarDatosProducto;
         String pathImagen;
 
+        private Vendedor vendedor;
+
         @FXML
         private TabPane tabPane;
+
+        @FXML
+        private Label lblNombreVendedor;
 
         @FXML
         private ImageView ivImagenProducto;
@@ -195,7 +201,6 @@ public class VendedorController {
                 modelFactoryController = ModelFactoryController.getInstance();
                 crudProductoViewController = new CrudProductoViewController(modelFactoryController);
                 inicializarProductoView();
-
 //    	colocarImagenBoton();
         }
 
@@ -466,6 +471,12 @@ public class VendedorController {
         private void nuevoProducto() {
                 mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <a�adir producto>.", AlertType.INFORMATION);
                 limpiarCamposProducto();
+
+        }
+
+        public void setVendedor(Vendedor vendedor){
+                this.vendedor = vendedor;
+                this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
 
         }
 }

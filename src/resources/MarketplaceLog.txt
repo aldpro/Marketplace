@@ -54,3 +54,13 @@ oct 31, 2021 2:05:24 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil g
 INFORMACIÓN: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
 Oct 31, 2021 3:50:57 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
 INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+Oct 31, 2021 6:11:58 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+Oct 31, 2021 6:16:40 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+Oct 31, 2021 6:18:52 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+Oct 31, 2021 6:28:57 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31
+Oct 31, 2021 6:38:53 PM co.edu.uniquindio.marketplace.persistencia.ArchivoUtil guardarRegistroLog
+INFO: Inicio de sesion,Inicio de sesion del usuario: Alejandro,2021-10-31

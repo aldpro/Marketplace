@@ -2,8 +2,11 @@ package co.edu.uniquindio.marketplace.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+import co.edu.uniquindio.marketplace.exceptions.VendedorException;
 import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Producto;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 import co.edu.uniquindio.marketplace.model.services.IModelFactoryService;
 import co.edu.uniquindio.marketplace.persistencia.Persistencia;
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
@@ -18,11 +21,11 @@ public class ModelFactoryController implements IModelFactoryService{
 	//------------------------------  Singleton ------------------------------------------------
 		// Clase estatica oculta. Tan solo se instanciara el singleton una vez
 		private static class SingletonHolder { 
-			// El constructor de Singleton puede ser llamado desde aquí al ser protected
+			// El constructor de Singleton puede ser llamado desde aquï¿½ al ser protected
 			private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
 		}
 
-		// Método para obtener la instancia de nuestra clase
+		// Mï¿½todo para obtener la instancia de nuestra clase
 		public static ModelFactoryController getInstance() {
 			return SingletonHolder.eINSTANCE;
 		}
@@ -82,7 +85,7 @@ public class ModelFactoryController implements IModelFactoryService{
         producto = new Producto();
         producto.setCategoria("Herramientas");
         producto.setNombre("Martillo");
-        producto.setImagen("D:\\Proyecto final\\Info\\12781927-martillo-de-madera-herramienta-de-carpintería.jpg");
+        producto.setImagen("D:\\Proyecto final\\Info\\12781927-martillo-de-madera-herramienta-de-carpinterï¿½a.jpg");
         producto.setPrecio(40000);
         producto.setEstadoProducto(EstadoProducto.CANCELADO);
         marketplace.getListaProductos().add(producto);
@@ -186,4 +189,15 @@ public class ModelFactoryController implements IModelFactoryService{
 		marketplace = Persistencia.cargarRecursoMarketplaceXML();
 	}
 
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
+
+		Vendedor vendedor = null;
+
+		try {
+			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion);
+		} catch (VendedorException e) {
+			e.getMessage();
+		}
+		return vendedor;
+	}
 }

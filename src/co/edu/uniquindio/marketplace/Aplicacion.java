@@ -16,9 +16,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class Aplicacion extends Application {
 	private Stage primaryStage;
-	
-	
-	/*
+
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -26,8 +24,8 @@ public class Aplicacion extends Application {
 		this.primaryStage.setTitle("Marketplace");
 		mostrarVentanaPrincipal();
 	}
-	*/
 
+	/*
 	@Override
 	public void start(Stage stage) {
 		TabPane tabPane = new TabPane();
@@ -56,7 +54,7 @@ public class Aplicacion extends Application {
 		stage = new Stage();
 		stage.setScene(scene);
 		stage.show();
-	}
+	}*/
 
 	public static void main(String[] args) {
 		launch(args);
