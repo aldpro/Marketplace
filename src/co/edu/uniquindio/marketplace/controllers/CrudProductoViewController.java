@@ -66,7 +66,6 @@ public class CrudProductoViewController {
 
 	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
 
-		
 		return modelFactoryController.crearVendedor(nombre,apellido,cedula,direccion);
 	}
 	
