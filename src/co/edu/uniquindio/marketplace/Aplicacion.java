@@ -1,10 +1,14 @@
 package co.edu.uniquindio.marketplace;
 	
 import java.io.IOException;
+import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.controllers.MarketplaceViewController;
+import co.edu.uniquindio.marketplace.controllers.VendedorController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -14,7 +18,7 @@ public class Aplicacion extends Application {
 	private Stage primaryStage;
 	
 	
-	
+	/*
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -22,7 +26,38 @@ public class Aplicacion extends Application {
 		this.primaryStage.setTitle("Marketplace");
 		mostrarVentanaPrincipal();
 	}
-	
+	*/
+
+	@Override
+	public void start(Stage stage) {
+		TabPane tabPane = new TabPane();
+		ArrayList<VendedorController> controllerArrayList = new ArrayList<>();
+
+		for (int i = 0; i < 5; i++) {
+			//Don't just load it into the new node save a reference
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/vendedor.fxml"));
+			try {
+				//Load it into the new parent node
+				Tab tab = new Tab("Tab:"+i, loader.load());
+				//Save contoller to arraylist of controllers
+				controllerArrayList.add(loader.getController());
+				//Add to tabPane
+				tabPane.getTabs().add(tab);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		//Do some stuff with your contollers
+		int index = 0;
+
+
+		Scene scene = new Scene(tabPane);
+		stage = new Stage();
+		stage.setScene(scene);
+		stage.show();
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}

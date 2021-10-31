@@ -14,14 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -39,7 +32,10 @@ public class MarketplaceViewController {
 	Producto productoSeleccionado;
 	FilteredList<Producto> filtrarDatosProducto;
 	String pathImagen;
-	
+
+	@FXML
+	private TabPane tabPane;
+
 	@FXML
 	private ImageView ivImagenProducto;
 	
@@ -192,13 +188,13 @@ public class MarketplaceViewController {
             pathImagen = imgFile.getAbsolutePath();
         }
     }
-   
 
 	@FXML
     void initialize() {
     	modelFactoryController = ModelFactoryController.getInstance();
     	crudProductoViewController = new CrudProductoViewController(modelFactoryController);
     	inicializarProductoView();
+
 //    	colocarImagenBoton();
     }
 
@@ -376,6 +372,7 @@ public class MarketplaceViewController {
     private void crearProducto() {
 		
     	//1. Capturar los datos
+
     	String nombre = txtNombreProducto.getText();
     	String categoria = txtCategoriaProducto.getText();
     	Double precio = Double.parseDouble(txtPrecioProducto.getText());
