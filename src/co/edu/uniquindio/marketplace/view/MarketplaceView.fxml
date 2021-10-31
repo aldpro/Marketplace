@@ -21,6 +21,27 @@
    <children>
       <TabPane prefHeight="559.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
+            <Tab text="Confi.">
+              <content>
+                <AnchorPane fx:id="main" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="30.0" layoutY="28.0" text="Datos de vendedor:" />
+                        <TextField fx:id="txtNombreVendedor" layoutX="134.0" layoutY="232.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="431.0" layoutY="236.0" text="Apellido(s):" />
+                        <Label layoutX="45.0" layoutY="236.0" text="Nombre(s):" />
+                        <TextField fx:id="txtApellidoVendedor" layoutX="533.0" layoutY="232.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="43.0" layoutY="294.0" text="Cédula:" />
+                        <TextField fx:id="txtCedulaVendedor" layoutX="134.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" />
+                        <TextField fx:id="txtDireccionVendedor" layoutX="533.0" layoutY="290.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="434.0" layoutY="294.0" text="Dirección:" />
+                        <Separator layoutX="1.0" layoutY="44.0" prefHeight="4.0" prefWidth="800.0" />
+                        <Circle fx:id="circleImagenPerfilInicio" fill="#eceff2" layoutX="403.0" layoutY="108.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Button fx:id="btnInsertarFotoPerfil" layoutX="340.0" layoutY="174.0" mnemonicParsing="false" onAction="#insertarFotoPerfilAction" text="Insertar foto de perfil" />
+                        <Button fx:id="btnCrearVendedor" layoutX="351.0" layoutY="407.0" mnemonicParsing="false" onAction="#crearVendedorAction" text="Añadir Vendedor" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
           <Tab text="Vendedor 1">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -69,6 +90,8 @@
                                                 <Button fx:id="btnFotoPerfil" layoutX="16.0" layoutY="146.0" mnemonicParsing="false" onAction="#cambiarImagenPerfilAction" text="Cambiar foto de perfil" />
                                                 <Label layoutX="27.0" layoutY="184.0" text="Contactos:" />
                                                 <Separator layoutX="26.0" layoutY="200.0" prefHeight="1.0" prefWidth="56.0" />
+                                                <Label layoutX="293.0" layoutY="80.0" text="Like:s" />
+                                                <Label layoutX="293.0" layoutY="107.0" prefHeight="17.0" prefWidth="21.0" text="xx" />
                                              </children>
                                           </AnchorPane>
                                        </content>

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
+import co.edu.uniquindio.marketplace.exceptions.VendedorException;
 import co.edu.uniquindio.marketplace.model.services.IMarketplaceService;
 
 public class Marketplace implements IMarketplaceService, Serializable {
@@ -147,8 +148,45 @@ public class Marketplace implements IMarketplaceService, Serializable {
 		
 		return productoEncontrado;
 	}
-	
-	
-	
+
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) throws VendedorException {
+		
+		Vendedor nuevoVendedor = null;
+		boolean flagVendedorExiste = false;
+		
+		flagVendedorExiste = verificarVendedorExistente(cedula);
+		
+		if (flagVendedorExiste == true) {
+			throw new VendedorException("El vendedor con cedula "+cedula+" no se puede crear. Ya existe");
+			
+		}else {
+			
+			nuevoVendedor = new Vendedor();
+			nuevoVendedor.setNombre(nombre);
+			nuevoVendedor.setApellido(apellido);
+			nuevoVendedor.setCedula(cedula);
+			nuevoVendedor.setDireccion(direccion);
+			getListaVendedores().add(nuevoVendedor);
+			
+		}
+		
+		
+		return nuevoVendedor;
+	}
+
+	private boolean verificarVendedorExistente(String cedula) {
+		boolean flagVendedorExistente = false;
+		
+		for (Vendedor vendedor : listaVendedores) {
+			
+			if(vendedor.getCedula().equalsIgnoreCase(cedula)) {
+				flagVendedorExistente = true;
+				break;
+			}
+		}
+		
+		return flagVendedorExistente;
+	}
+
 	
 }

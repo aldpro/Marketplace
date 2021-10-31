@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplace.Aplicacion;
 import co.edu.uniquindio.marketplace.model.Producto;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,8 +27,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class MarketplaceViewController {
 	
@@ -36,10 +40,57 @@ public class MarketplaceViewController {
 	CrudProductoViewController crudProductoViewController;
 	
 	ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
+	ObservableList<Vendedor> listaVendedoresData = FXCollections.observableArrayList();
 	Producto productoSeleccionado;
 	FilteredList<Producto> filtrarDatosProducto;
 	String pathImagen;
+	//Vendedores
 	
+	@FXML
+    private AnchorPane main;
+	
+    @FXML
+    private TextField txtCedulaVendedor;
+    
+    @FXML
+    private TextField txtNombreVendedor;
+    
+    @FXML
+    private TextField txtApellidoVendedor;
+    
+    @FXML
+    private TextField txtDireccionVendedor;
+    
+    @FXML
+    private Circle circleImagenPerfilInicio;
+    
+    @FXML
+    private Button btnInsertarFotoPerfil;
+    
+    @FXML
+    private Button btnCrearVendedor;
+    
+    @FXML
+    void insertarFotoPerfilAction(ActionEvent event) {
+
+    	FileChooser open = new FileChooser();
+    	Stage stage = (Stage)main.getScene().getWindow();
+    	File file = open.showOpenDialog(stage);
+    	if (file != null){
+    		Image image = new Image(file.toURI().toString(), 300, 300, false, true);
+    		circleImagenPerfilInicio.setFill(new ImagePattern(image));
+    	}else{
+    		System.out.println("No existe el archivo");
+    	}
+    }
+    
+    @FXML
+    void crearVendedorAction(ActionEvent event) {
+
+    	crearVendedor();
+    }
+
+	//Productos
 	@FXML
 	private ImageView ivImagenProducto;
 	
@@ -473,5 +524,60 @@ public class MarketplaceViewController {
     	mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <añadir producto>.", AlertType.INFORMATION);
 		limpiarCamposProducto();
 		
+	}
+    
+    private void crearVendedor() {
+    	
+    	//1. Capturar los datos
+    	String nombre = txtNombreVendedor.getText();
+    	String apellido = txtApellidoVendedor.getText();
+    	String cedula  = txtCedulaVendedor.getText();
+    	String direccion = txtDireccionVendedor.getText();
+    	
+    	//2. Validar la información
+    	if (datosValidos(nombre, apellido, cedula, direccion) == true) {
+    		
+    		Vendedor vendedor = null;
+    		vendedor = crudProductoViewController.crearVendedor(nombre, apellido, cedula, direccion);
+    		
+    		if (vendedor != null) {
+    			listaVendedoresData.add(vendedor);
+//    			crudProductoViewController.guardarDatos();
+//    			crudProductoViewController.registrarAccion("El producto se ha creado con éxito",1,"crear producto");
+    			mostrarMensaje("Notificación de vendedor", "Vendedor creado", "El Vendedor se ha creado con éxito", AlertType.INFORMATION);
+    			limpiarCamposProducto();
+    		}else {
+    			mostrarMensaje("Notificación de vendedor", "Vendedor no creado", "El vendedor no se ha creado con éxito", AlertType.INFORMATION);
+    		}
+    	}else {
+    			mostrarMensaje("Notificación de vendedor", "vendedor no creado", "Los datos ingresados no son inválidos", AlertType.ERROR);
+
+    	}
+    	
+	}
+
+	private boolean datosValidos(String nombre, String apellido, String cedula, String direccion) {
+		
+		String mensaje = "";
+	
+	
+		if(nombre == null || nombre.equals(""))
+			mensaje += "El nombre es invalido \n" ;
+	
+		if(apellido == null || apellido.equals(""))
+			mensaje += "La categoria es invalida \n" ;
+	
+		if(cedula == null || cedula.equals(""))
+			mensaje += "La categoria es invalida \n" ;
+		
+		if(direccion == null || direccion.equals(""))
+			mensaje += "La categoria es invalida \n" ;
+	
+		if(mensaje.equals("")){
+			return true;
+		}else{
+			mostrarMensaje("Notificación Vendedor","Datos invalidos",mensaje, AlertType.WARNING);
+			return false;
+		}
 	}
 }

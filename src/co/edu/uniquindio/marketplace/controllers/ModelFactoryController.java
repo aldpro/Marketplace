@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Producto;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 import co.edu.uniquindio.marketplace.model.services.IModelFactoryService;
 import co.edu.uniquindio.marketplace.persistencia.Persistencia;
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
+import co.edu.uniquindio.marketplace.exceptions.VendedorException;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 
 
@@ -184,6 +186,18 @@ public class ModelFactoryController implements IModelFactoryService{
 	public void cargarResourceXML() {
 
 		marketplace = Persistencia.cargarRecursoMarketplaceXML();
+	}
+
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
+		
+		Vendedor vendedor = null;
+		
+		try {
+			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion);
+		} catch (VendedorException e) {
+			e.getMessage();
+		}
+		return vendedor;
 	}
 
 }

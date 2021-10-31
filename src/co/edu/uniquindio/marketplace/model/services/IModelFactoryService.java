@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 import co.edu.uniquindio.marketplace.model.Producto;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 
 public interface IModelFactoryService {
 
@@ -14,6 +15,7 @@ public interface IModelFactoryService {
 	public ArrayList<Producto> obtenerProductos();
 	boolean actualizarProducto(String nombreActual, String nombre, String categoria, double precio,
 			EstadoProducto estadoProducto);
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion);
 	
 	
 }
