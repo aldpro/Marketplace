@@ -34,10 +34,10 @@ public class ModelFactoryController implements IModelFactoryService{
 			
 			
 //			//1.Inicializar datos y luego guardarlo en el archivo
-//			iniciarSalvarDatosPrueba();
+			iniciarSalvarDatosPrueba();
 //			
 			//2. cargar los datos de los archivos
-//			cargarDatosDesdeArchivos();
+			cargarDatosDesdeArchivos();
 			
 			//3. Guardar y cargar el recurso serializable Binario
 //			guardarResourceBinario();
@@ -46,7 +46,7 @@ public class ModelFactoryController implements IModelFactoryService{
 			
 			//4. Guardar y cargar el recurso serializable XML
 //			guardarResourceXML();
-			cargarResourceXML();
+//			cargarResourceXML();
 			
 			if (marketplace == null){
 				System.out.println("es null");
@@ -69,7 +69,7 @@ public class ModelFactoryController implements IModelFactoryService{
         Producto producto = new Producto();
         producto.setCategoria("Hogar");
         producto.setNombre("Alfombra");
-        producto.setImagen("D:\\Proyecto final\\Info\\alfombra.jpg");
+        producto.setImagen("C:\\td\\Imagenes\\alfombra.jpg");
         producto.setPrecio(20000);
         producto.setEstadoProducto(EstadoProducto.PUBLICADO);
         marketplace.getListaProductos().add(producto);
@@ -77,7 +77,7 @@ public class ModelFactoryController implements IModelFactoryService{
         producto = new Producto();
         producto.setCategoria("Hogar");
         producto.setNombre("Aspiradora");
-        producto.setImagen("D:\\Proyecto final\\Info\\aspiradora.jpg");
+        producto.setImagen("C:\\td\\Imagenes\\aspiradora.jpg");
         producto.setPrecio(30000);
         producto.setEstadoProducto(EstadoProducto.VENDIDO);
         marketplace.getListaProductos().add(producto);
@@ -85,7 +85,7 @@ public class ModelFactoryController implements IModelFactoryService{
         producto = new Producto();
         producto.setCategoria("Herramientas");
         producto.setNombre("Martillo");
-        producto.setImagen("D:\\Proyecto final\\Info\\12781927-martillo-de-madera-herramienta-de-carpinter�a.jpg");
+        producto.setImagen("C:\\td\\Imagenes\\martillo.jpg");
         producto.setPrecio(40000);
         producto.setEstadoProducto(EstadoProducto.CANCELADO);
         marketplace.getListaProductos().add(producto);

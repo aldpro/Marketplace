@@ -66,7 +66,7 @@ public class Aplicacion extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Aplicacion.class.getResource("view/MarketplaceView.fxml"));
+			loader.setLocation(Aplicacion.class.getResource("view/ConfiView.fxml"));
 			AnchorPane rootLayout = (AnchorPane) loader.load();
 			MarketplaceViewController marketplaceViewController = loader.getController();
 

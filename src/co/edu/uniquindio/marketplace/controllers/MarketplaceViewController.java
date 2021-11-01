@@ -136,7 +136,7 @@ public class MarketplaceViewController {
 		  if (vendedor != null) {
 			  listaVendedoresData.add(vendedor);
 
-			  FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/vendedor.fxml"));
+			  FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
 			  try {
 				  // crear tab
 				  Tab tab = new Tab("Vendedor "+ vendedor.getNombre(), loader.load());

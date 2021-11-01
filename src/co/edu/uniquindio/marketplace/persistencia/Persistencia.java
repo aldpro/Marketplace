@@ -18,18 +18,19 @@ import co.edu.uniquindio.marketplace.model.EstadoProducto;
 import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.Usuario;
+import co.edu.uniquindio.marketplace.model.Vendedor;
 
 
 
 public class Persistencia {
 
-	public static final String RUTA_ARCHIVO_PRODUCTOS = "src/resources/archivoProductos.txt";
-	public static final String RUTA_ARCHIVO_EMPLEADOS = "src/resources/archivoEmpleados.txt";
+	public static final String RUTA_ARCHIVO_PRODUCTOS = "C://td//persistencia//archivos//archivoProductos.txt";
+	public static final String RUTA_ARCHIVO_VENDEDORES = "C://td//persistencia//archivos//archivoVendedores.txt";
 //	public static final String RUTA_ARCHIVO_USUARIOS = "src/resources/archivoUsuarios.txt";
-	public static final String RUTA_ARCHIVO_LOG = "src/resources/MarketplaceLog.txt";
+	public static final String RUTA_ARCHIVO_LOG = "C://td//persistencia//log//MarketplaceLog.txt";
 //	public static final String RUTA_ARCHIVO_OBJETOS = "src/resources/archivoObjetos.txt";
-	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_BINARIO = "src/resources/model.dat";
-	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_XML = "src/resources/model.xml";
+	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_BINARIO = "C://td//persistencia//model.dat";
+	public static final String RUTA_ARCHIVO_MODELO_MARKETPLACE_XML = "C://td//persistencia//model.xml";
 
 
 
@@ -44,11 +45,11 @@ public class Persistencia {
 			marketplace.getListaProductos().addAll(productosCargados);
 
 
-//		//cargar archivos empleados
-//		ArrayList<Empleado> empleadosCargados = cargarEmpleados();
-//
-//		if(empleadosCargados.size() > 0)
-//			banco.getListaEmpleados().addAll(empleadosCargados);
+		//cargar archivos vendedores
+		ArrayList<Vendedor> vendedoresCargados = cargarVendedores();
+
+		if(vendedoresCargados.size() > 0)
+			marketplace.getListaVendedores().addAll(vendedoresCargados);
 
 
 		//cargar archivo objetos
@@ -72,25 +73,25 @@ public class Persistencia {
 
 		for(Producto producto:listaProductos)
 		{
-			contenido+= producto.getNombre()+","+producto.getImagen()+","+producto.getCategoria()+
-		   producto.getPrecio()+","+producto.getEstadoProducto()+"\n";
+			contenido+= producto.getNombre()+"@@"+producto.getImagen()+"@@"+producto.getCategoria()+"@@"+
+		   producto.getPrecio()+"@@"+producto.getEstadoProducto()+"\n";
 		}
 		ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
 
 	}
 
 
-//	public static void guardarEmpleados(ArrayList<Empleado> listaEmpleados) throws IOException {
-//
-//		// TODO Auto-generated method stub
-//		String contenido = "";
-//
-//		for(Empleado empleado:listaEmpleados)
-//		{
-//			contenido+= empleado.getNombre()+","+empleado.getApellido()+","+empleado.getCedula()+","+empleado.getFechaNacimiento()+"\n";
-//		}
-//		ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_EMPLEADOS, contenido, false);
-//	}
+	public static void guardarVendedores(ArrayList<Vendedor> listaVendedores) throws IOException {
+
+		// TODO Auto-generated method stub
+		String contenido = "";
+
+		for(Vendedor vendedor:listaVendedores)
+		{
+			contenido+= vendedor.getNombre()+"@@"+vendedor.getApellido()+"@@"+vendedor.getCedula()+"@@"+vendedor.getDireccion()+"\n";
+		}
+		ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_VENDEDORES, contenido, false);
+	}
 
 
 
@@ -115,15 +116,14 @@ public class Persistencia {
 		for (int i = 0; i < contenido.size(); i++)
 		{
 			linea = contenido.get(i);
+			String[]campos = linea.split("@@");
+			
 			Producto producto = new Producto();
-			producto.setNombre(linea.split(",")[0]);
-			producto.setImagen(linea.split(",")[1]);
-			producto.setCategoria(linea.split(",")[2]);
-			producto.setPrecio(Double.parseDouble(linea.split(",")[5]));
-
-			enun = linea.split(",")[6];
-
-
+			producto.setNombre(campos[0]);
+			producto.setImagen(campos[1]);
+			producto.setCategoria(campos[2]);
+			producto.setPrecio(Double.parseDouble(campos[3]));
+			enun = campos[4];
 			producto.setEstadoProducto(verificarEnumeracion(enun));
 			listaproductos.add(producto);
 		}
@@ -145,27 +145,25 @@ public class Persistencia {
 }
 
 
-//	private static ArrayList<Empleado> cargarEmpleados() throws FileNotFoundException, IOException {
-//
-//		ArrayList<Empleado> empleados =new ArrayList<Empleado>();
-//
-//		ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_EMPLEADOS);
-//		String linea="";
-//
-//		for (int i = 0; i < contenido.size(); i++)
-//		{
-//			linea = contenido.get(i);
-//			Empleado empleado = new Empleado();
-//			empleado.setNombre(linea.split(",")[0]);
-//			empleado.setApellido(linea.split(",")[1]);
-//			empleado.setCedula(linea.split(",")[2]);
-//			empleado.setFechaNacimiento(linea.split(",")[3]);
-//			empleados.add(empleado);
-//		}
-//		return empleados;
-//
-//
-//	}
+	private static ArrayList<Vendedor> cargarVendedores() throws FileNotFoundException, IOException {
+
+		ArrayList<Vendedor> listaVendedores =new ArrayList<Vendedor>();
+
+		ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_VENDEDORES);
+		String linea="";
+
+		for (int i = 0; i < contenido.size(); i++)
+		{
+			linea = contenido.get(i);
+			Vendedor vendedor = new Vendedor();
+			vendedor.setNombre(linea.split("@@")[0]);
+			vendedor.setApellido(linea.split("@@")[1]);
+			vendedor.setCedula(linea.split("@@")[2]);
+			vendedor.setDireccion(linea.split("@@")[3]);
+			listaVendedores.add(vendedor);
+		}
+		return listaVendedores;
+	}
 
 
 	public static void guardaRegistroLog(String mensajeLog, int nivel, String accion){
