@@ -477,7 +477,7 @@ public class VendedorController {
         public void setVendedor(Vendedor vendedor){
                 this.vendedor = vendedor;
                 this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
-
+                //TODO: Cargara datos del vendedor
         }
 }
 

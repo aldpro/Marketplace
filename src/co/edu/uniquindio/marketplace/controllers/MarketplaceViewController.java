@@ -138,10 +138,11 @@ public class MarketplaceViewController {
 
 			  FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/vendedor.fxml"));
 			  try {
-				  //Load it into the new parent node
+				  // crear tab
 				  Tab tab = new Tab("Vendedor "+ vendedor.getNombre(), loader.load());
-				  //Save contoller to arraylist of controllers
+				  // Guardar controlador
 				  VendedorController controller = loader.getController();
+				  // Pasar el vendedor al nuevo controlador para cargar datos
 				  controller.setVendedor(vendedor);
 				  vendedorControllers.add(controller);
 				  //Add to tabPane
