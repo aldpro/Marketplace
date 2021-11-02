@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.Aplicacion;
+import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -136,6 +137,8 @@ public class ConfiViewController {
 		  if (vendedor != null) {
 			  listaVendedoresData.add(vendedor);
 			  limpiarCamposVendedores();
+			  crudVendedorViewController.guardarDatos();
+			  crudVendedorViewController.registrarAccion("El vendedor se ha creado con exito",1,"Crear vendedor");
 
 			  FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
 			  try {
@@ -148,12 +151,10 @@ public class ConfiViewController {
 				  vendedorControllers.add(controller);
 				  //Add to tabPane
 				  tabPane.getTabs().add(tab);
+			
 			  } catch (IOException e) {
 				  e.printStackTrace();
 			  }
-
-  //    			crudProductoViewController.guardarDatos();
-  //    			crudProductoViewController.registrarAccion("El producto se ha creado con �xito",1,"crear producto");
 			  mostrarMensaje("Notificacion de vendedor", "Vendedor creado", "El Vendedor se ha creado con exito", Alert.AlertType.INFORMATION);
 
 		  }else {
@@ -182,9 +183,15 @@ public class ConfiViewController {
 //    	colocarImagenBoton();
     }
 	
+	public ObservableList<Vendedor> getListaVendedoresData() {
+        listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());
+        return listaVendedoresData;
+	}
+	
 	void inicializarVendedor(){
 		
 		for (int i = 0; i< listaVendedoresData.size(); i++){
+			listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());
 			Vendedor vendedor = listaVendedoresData.get(i);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
 			try {
@@ -202,5 +209,6 @@ public class ConfiViewController {
 			}
 		}
 	}
+	
 	
 }

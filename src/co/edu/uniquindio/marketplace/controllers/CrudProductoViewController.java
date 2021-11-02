@@ -48,8 +48,6 @@ public class CrudProductoViewController {
 	public boolean actualizarProducto(String nombreActual, String nombre, String categoria, Double precio,
 			EstadoProducto estadoProducto) {
 
-		
-		
 		return modelFactoryController.actualizarProducto(nombreActual, nombre, categoria, precio, estadoProducto);
 	}
 

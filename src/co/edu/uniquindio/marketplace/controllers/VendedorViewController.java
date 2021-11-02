@@ -384,7 +384,7 @@ public class VendedorViewController {
                 Double precio = Double.parseDouble(txtPrecioProducto.getText());
                 EstadoProducto estadoProducto = cbEstadoProducto.getValue();
 
-                //2. Validar la informaci�n
+                //2. Validar la informacion
                 if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
 
                         Producto producto = null;

@@ -7,6 +7,7 @@ import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 
 public class CrudVendedorViewController {
+	
 	Aplicacion aplicacion;
 	
 	ModelFactoryController modelFactoryController;
@@ -36,5 +37,13 @@ public class CrudVendedorViewController {
 	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
 
 		return modelFactoryController.crearVendedor(nombre,apellido,cedula,direccion);
+	}
+	public void guardarDatos() {
+		modelFactoryController.guardarResourceXML();
+	}
+	
+	public void registrarAccion(String mensaje, int nivel, String accion) {
+		// TODO Auto-generated method stub
+		modelFactoryController.registrarAccionesSistema(mensaje, nivel, accion);
 	}
 }
