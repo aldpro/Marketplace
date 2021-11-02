@@ -13,10 +13,20 @@ public class Producto  implements Serializable{
 	private String nombre, imagen, categoria;
 	private double precio;
 	private EstadoProducto estadoProducto;
-	
+	private Vendedor vendedor;
 	
 	public Producto() {
 		
+	}
+
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
 

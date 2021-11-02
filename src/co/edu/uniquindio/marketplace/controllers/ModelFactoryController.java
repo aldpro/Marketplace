@@ -34,19 +34,19 @@ public class ModelFactoryController implements IModelFactoryService{
 			
 			
 //			//1.Inicializar datos y luego guardarlo en el archivo
-			iniciarSalvarDatosPrueba();
+//			iniciarSalvarDatosPrueba();
 //			
 			//2. cargar los datos de los archivos
 			cargarDatosDesdeArchivos();
 			
 			//3. Guardar y cargar el recurso serializable Binario
 //			guardarResourceBinario();
-//			cargarResourceBinario();
+			cargarResourceBinario();
 			
 			
 			//4. Guardar y cargar el recurso serializable XML
 //			guardarResourceXML();
-//			cargarResourceXML();
+			cargarResourceXML();
 			
 			if (marketplace == null){
 				System.out.println("es null");
@@ -146,7 +146,22 @@ public class ModelFactoryController implements IModelFactoryService{
 	public ArrayList<Producto> obtenerProductos() {
 		return marketplace.getListaProductos();
 	}
+	
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
 
+		Vendedor vendedor = null;
+
+		try {
+			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion);
+		} catch (VendedorException e) {
+			e.getMessage();
+		}
+		return vendedor;
+	}
+	public ArrayList<Vendedor> obtenerVendedores() {
+		// TODO Auto-generated method stub
+		return marketplace.getListaVendedores();
+	}
 
 	public void iniciarSalvarDatosPrueba() {
 	
@@ -169,15 +184,15 @@ public class ModelFactoryController implements IModelFactoryService{
 		}
 	}
 	
-//	public void cargarResourceBinario() {
-//		
-//		marketplace = Persistencia.cargarRecursoMarketplaceBinario();
-//	}
-//	
-//	public void guardarResourceBinario() {
-//		
-//		Persistencia.guardarRecursoBancoBinario(marketplace);
-//	}
+	public void cargarResourceBinario() {
+		
+		marketplace = Persistencia.cargarRecursoMarketplaceBinario();
+	}
+	
+	public void guardarResourceBinario() {
+		
+		Persistencia.guardarRecursoBancoBinario(marketplace);
+	}
 	
 	public void guardarResourceXML() {
 
@@ -189,15 +204,7 @@ public class ModelFactoryController implements IModelFactoryService{
 		marketplace = Persistencia.cargarRecursoMarketplaceXML();
 	}
 
-	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
+	
 
-		Vendedor vendedor = null;
 
-		try {
-			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion);
-		} catch (VendedorException e) {
-			e.getMessage();
-		}
-		return vendedor;
-	}
 }

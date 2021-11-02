@@ -1,14 +1,9 @@
 package co.edu.uniquindio.marketplace;
 	
 import java.io.IOException;
-import java.util.ArrayList;
-
 import co.edu.uniquindio.marketplace.controllers.ConfiViewController;
-import co.edu.uniquindio.marketplace.controllers.VendedorViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;

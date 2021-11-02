@@ -411,7 +411,6 @@ public class VendedorViewController {
 
                 if(productoSeleccionado != null) {
 
-
                         if(mostrarMensajeConfirmacion("�Est� seguro de eliminar el producto seleccionado?")== true) {
 
                                 productoEliminado = crudProductoViewController.eliminarProducto(productoSeleccionado.getNombre());
@@ -419,7 +418,8 @@ public class VendedorViewController {
                                 if(productoEliminado == true ) {
                                         listaProductosData.remove(productoSeleccionado);
                                         productoSeleccionado = null;
-
+                                        crudProductoViewController.guardarDatos();
+                                        crudProductoViewController.registrarAccion("El producto se ha eliminado con exito",1, "Eliminar producto");
                                         tableProductos.getSelectionModel().clearSelection();
                                         limpiarCamposProducto();
                                         mostrarMensaje("Notificaci�n de producto", "Producto eliminado", "El producto se ha eliminado con �xito", AlertType.INFORMATION);
@@ -456,13 +456,15 @@ public class VendedorViewController {
 
                                 if (productoActualizado == true) {
                                         tableProductos.refresh();
-                                        mostrarMensaje("Notificaci�n de producto", "Producto actualizado", "El producto se ha actualizado con �xito", AlertType.INFORMATION);
+                                        mostrarMensaje("Notificacion de producto", "Producto actualizado", "El producto se ha actualizado con exito", AlertType.INFORMATION);
+                                        crudProductoViewController.guardarDatos();
+                                        crudProductoViewController.registrarAccion("El producto no se ha actualizado con exito", 1, "Actualizar Producto");
                                         limpiarCamposProducto();
                                 }else {
-                                        mostrarMensaje("Notificaci�n de producto", "Producto no actualizado", "El producto no se ha actualizado con �xito", AlertType.INFORMATION);
+                                        mostrarMensaje("Notificacion de producto", "Producto no actualizado", "El producto no se ha actualizado con exito", AlertType.INFORMATION);
                                 }
                         }else {
-                                mostrarMensaje("Notificaci�n de producto", "Producto no actualizado", "Los datos ingresados son inv�lidos", AlertType.ERROR);
+                                mostrarMensaje("Notificacion de producto", "Producto no actualizado", "Los datos ingresados son inv�lidos", AlertType.ERROR);
 
                         }
                 }
@@ -477,6 +479,7 @@ public class VendedorViewController {
         public void setVendedor(Vendedor vendedor){
                 this.vendedor = vendedor;
                 this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
+//                this.circleImagenPerfil.setFill(vendedor.get);
                 //TODO: Cargara datos del vendedor
         }
 }

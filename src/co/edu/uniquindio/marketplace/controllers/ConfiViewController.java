@@ -22,7 +22,7 @@ public class ConfiViewController {
 	
 	Aplicacion aplicacion;
 	ModelFactoryController modelFactoryController;
-	CrudProductoViewController crudProductoViewController;
+	CrudVendedorViewController crudVendedorViewController;
 	ObservableList<Vendedor> listaVendedoresData = FXCollections.observableArrayList();
 	ArrayList<VendedorViewController> vendedorControllers = new ArrayList<>();
 
@@ -131,10 +131,11 @@ public class ConfiViewController {
 	  if (validarDatosVendedor(nombre, apellido, cedula, direccion) == true) {
 		  
 		  Vendedor vendedor = null;
-		  vendedor = crudProductoViewController.crearVendedor(nombre, apellido, cedula, direccion);
+		  vendedor = crudVendedorViewController.crearVendedor(nombre, apellido, cedula, direccion);
 		  
 		  if (vendedor != null) {
 			  listaVendedoresData.add(vendedor);
+			  limpiarCamposVendedores();
 
 			  FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
 			  try {
@@ -165,10 +166,18 @@ public class ConfiViewController {
 	  
   }
 
+	private void limpiarCamposVendedores() {
+		txtNombreVendedor.setText("");
+        txtApellidoVendedor.setText("");
+        txtCedulaVendedor.setText("");
+        txtDireccionVendedor.setText("");
+		
+	}
+
 	@FXML
     void initialize() {
     	modelFactoryController = ModelFactoryController.getInstance();
-    	crudProductoViewController = new CrudProductoViewController(modelFactoryController);
+    	crudVendedorViewController = new CrudVendedorViewController(modelFactoryController);
     	inicializarVendedor();
 //    	colocarImagenBoton();
     }
