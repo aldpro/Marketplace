@@ -189,9 +189,9 @@ public class ConfiViewController {
 	}
 	
 	void inicializarVendedor(){
-		
+		listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());
 		for (int i = 0; i< listaVendedoresData.size(); i++){
-			listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());
+			
 			Vendedor vendedor = listaVendedoresData.get(i);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
 			try {
