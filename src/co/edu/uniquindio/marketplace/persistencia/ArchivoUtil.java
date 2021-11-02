@@ -63,7 +63,6 @@ public  class ArchivoUtil {
 		return contenido;
 	}
 	
-	
 	public static void guardarRegistroLog(String mensajeLog, int nivel, String accion, String rutaArchivo)
 	{
 		String log = "";
