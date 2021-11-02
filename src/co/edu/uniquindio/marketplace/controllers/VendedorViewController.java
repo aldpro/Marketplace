@@ -479,7 +479,7 @@ public class VendedorViewController {
         public void setVendedor(Vendedor vendedor){
                 this.vendedor = vendedor;
                 this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
-                this.circleImagenPerfil.setFill(vendedor.getImagen());
+//                this.circleImagenPerfil.setFill(vendedor.getImagen());
                 //TODO: Cargara datos del vendedor
         }
 }
