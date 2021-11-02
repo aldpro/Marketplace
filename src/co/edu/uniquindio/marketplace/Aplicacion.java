@@ -3,8 +3,8 @@ package co.edu.uniquindio.marketplace;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import co.edu.uniquindio.marketplace.controllers.MarketplaceViewController;
-import co.edu.uniquindio.marketplace.controllers.VendedorController;
+import co.edu.uniquindio.marketplace.controllers.ConfiViewController;
+import co.edu.uniquindio.marketplace.controllers.VendedorViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
@@ -68,7 +68,7 @@ public class Aplicacion extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Aplicacion.class.getResource("view/ConfiView.fxml"));
 			AnchorPane rootLayout = (AnchorPane) loader.load();
-			MarketplaceViewController marketplaceViewController = loader.getController();
+			ConfiViewController marketplaceViewController = loader.getController();
 
 			marketplaceViewController.setAplicacion(this);
 

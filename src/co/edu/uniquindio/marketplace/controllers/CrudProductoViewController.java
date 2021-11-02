@@ -55,7 +55,6 @@ public class CrudProductoViewController {
 	}
 
 	public void guardarDatos() {
-		// TODO Auto-generated method stub
 		modelFactoryController.guardarResourceXML();
 	}
 

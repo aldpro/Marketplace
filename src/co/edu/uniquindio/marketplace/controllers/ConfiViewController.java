@@ -18,13 +18,13 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class MarketplaceViewController {
+public class ConfiViewController {
 	
 	Aplicacion aplicacion;
 	ModelFactoryController modelFactoryController;
 	CrudProductoViewController crudProductoViewController;
 	ObservableList<Vendedor> listaVendedoresData = FXCollections.observableArrayList();
-	ArrayList<VendedorController> vendedorControllers = new ArrayList<>();
+	ArrayList<VendedorViewController> vendedorControllers = new ArrayList<>();
 
 	@FXML
 	private TabPane tabPane;
@@ -53,7 +53,7 @@ public class MarketplaceViewController {
 	@FXML
 	private Circle circleImagenPerfilInicio;
 
-	public MarketplaceViewController() {
+	public ConfiViewController() {
 
 	}
 
@@ -127,7 +127,7 @@ public class MarketplaceViewController {
 	  String cedula  = txtCedulaVendedor.getText();
 	  String direccion = txtDireccionVendedor.getText();
 	  
-	  //2. Validar la informaci�n
+	  //2. Validar la informacion
 	  if (validarDatosVendedor(nombre, apellido, cedula, direccion) == true) {
 		  
 		  Vendedor vendedor = null;
@@ -141,7 +141,7 @@ public class MarketplaceViewController {
 				  // crear tab
 				  Tab tab = new Tab("Vendedor "+ vendedor.getNombre(), loader.load());
 				  // Guardar controlador
-				  VendedorController controller = loader.getController();
+				  VendedorViewController controller = loader.getController();
 				  // Pasar el vendedor al nuevo controlador para cargar datos
 				  controller.setVendedor(vendedor);
 				  vendedorControllers.add(controller);
@@ -153,13 +153,13 @@ public class MarketplaceViewController {
 
   //    			crudProductoViewController.guardarDatos();
   //    			crudProductoViewController.registrarAccion("El producto se ha creado con �xito",1,"crear producto");
-			  mostrarMensaje("Notificaci�n de vendedor", "Vendedor creado", "El Vendedor se ha creado con �xito", Alert.AlertType.INFORMATION);
+			  mostrarMensaje("Notificacion de vendedor", "Vendedor creado", "El Vendedor se ha creado con exito", Alert.AlertType.INFORMATION);
 
 		  }else {
-			  mostrarMensaje("Notificaci�n de vendedor", "Vendedor no creado", "El vendedor no se ha creado con �xito", Alert.AlertType.INFORMATION);
+			  mostrarMensaje("Notificacion de vendedor", "Vendedor no creado", "El vendedor no se ha creado con exito", Alert.AlertType.INFORMATION);
 		  }
 	  }else {
-			  mostrarMensaje("Notificaci�n de vendedor", "vendedor no creado", "Los datos ingresados no son inv�lidos", Alert.AlertType.ERROR);
+			  mostrarMensaje("Notificacion de vendedor", "vendedor no creado", "Los datos ingresados no son invalidos", Alert.AlertType.ERROR);
   
 	  }
 	  
@@ -169,9 +169,29 @@ public class MarketplaceViewController {
     void initialize() {
     	modelFactoryController = ModelFactoryController.getInstance();
     	crudProductoViewController = new CrudProductoViewController(modelFactoryController);
-
+    	inicializarVendedor();
 //    	colocarImagenBoton();
     }
-
+	
+	void inicializarVendedor(){
+		
+		for (int i = 0; i< listaVendedoresData.size(); i++){
+			Vendedor vendedor = listaVendedoresData.get(i);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/VendedorView.fxml"));
+			try {
+				// crear tab
+				Tab tab = new Tab("Vendedor "+ vendedor.getNombre(), loader.load());
+				// Guardar controlador
+				VendedorViewController controller = loader.getController();
+				// Pasar el vendedor al nuevo controlador para cargar datos
+				controller.setVendedor(vendedor);
+				vendedorControllers.add(controller);
+				//add to tapPane
+				tabPane.getTabs().add(tab);
+			}catch (IOException e){
+				e.printStackTrace();
+			}
+		}
+	}
 	
 }

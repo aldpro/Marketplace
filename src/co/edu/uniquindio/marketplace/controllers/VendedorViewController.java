@@ -24,7 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
-public class VendedorController {
+public class VendedorViewController {
 
         Aplicacion aplicacion;
         ModelFactoryController modelFactoryController;
@@ -262,7 +262,7 @@ public class VendedorController {
                 }
         }
 
-        public VendedorController() {
+        public VendedorViewController() {
 
         }
 
@@ -393,14 +393,14 @@ public class VendedorController {
                         if (producto != null) {
                                 listaProductosData.add(producto);
                                 crudProductoViewController.guardarDatos();
-                                crudProductoViewController.registrarAccion("El producto se ha creado con �xito",1,"crear producto");
-                                mostrarMensaje("Notificaci�n de producto", "Producto creado", "El producto se ha creado con �xito", AlertType.INFORMATION);
+                                crudProductoViewController.registrarAccion("El producto se ha creado con exito",1,"crear producto");
+                                mostrarMensaje("Notificacion de producto", "Producto creado", "El producto se ha creado con exito", AlertType.INFORMATION);
                                 limpiarCamposProducto();
                         }else {
-                                mostrarMensaje("Notificaci�n de producto", "Producto no creado", "El producto no se ha creado con �xito", AlertType.INFORMATION);
+                                mostrarMensaje("Notificacion de producto", "Producto no creado", "El producto no se ha creado con exito", AlertType.INFORMATION);
                         }
                 }else {
-                        mostrarMensaje("Notificaci�n de producto", "Producto no creado", "Los datos ingresados son inv�lidos", AlertType.ERROR);
+                        mostrarMensaje("Notificacion de producto", "Producto no creado", "Los datos ingresados son invalidos", AlertType.ERROR);
 
                 }
         }
