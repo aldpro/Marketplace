@@ -64,6 +64,9 @@ public class ConfiViewController {
 
 	public void setAplicacion(Aplicacion aplicacion) {
 			this.aplicacion = aplicacion;
+			for (VendedorViewController controller: vendedorControllers) {
+				controller.setAplicacion(aplicacion);
+			}
 	}
   
 	@FXML
@@ -148,6 +151,7 @@ public class ConfiViewController {
 				  VendedorViewController controller = loader.getController();
 				  // Pasar el vendedor al nuevo controlador para cargar datos
 				  controller.setVendedor(vendedor);
+				  controller.setAplicacion(aplicacion);
 				  vendedorControllers.add(controller);
 				  //Add to tabPane
 				  tabPane.getTabs().add(tab);
@@ -190,6 +194,7 @@ public class ConfiViewController {
 	
 	void inicializarVendedor(){
 		listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());
+		
 		for (int i = 0; i< listaVendedoresData.size(); i++){
 			
 			Vendedor vendedor = listaVendedoresData.get(i);

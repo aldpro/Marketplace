@@ -46,5 +46,5 @@ public class CrudVendedorViewController {
 		// TODO Auto-generated method stub
 		modelFactoryController.registrarAccionesSistema(mensaje, nivel, accion);
 	}
-	//aaaaaaaaaaaaaaaaaaa
+	
 }

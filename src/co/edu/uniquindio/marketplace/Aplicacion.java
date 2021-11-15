@@ -63,9 +63,10 @@ public class Aplicacion extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Aplicacion.class.getResource("view/ConfiView.fxml"));
 			AnchorPane rootLayout = (AnchorPane) loader.load();
-			ConfiViewController marketplaceViewController = loader.getController();
+			ConfiViewController confiViewController = loader.getController();
 
-			marketplaceViewController.setAplicacion(this);
+			confiViewController.setAplicacion(this);
+			
 
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
