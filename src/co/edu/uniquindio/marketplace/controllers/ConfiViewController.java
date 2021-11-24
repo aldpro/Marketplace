@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.Aplicacion;
-import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +16,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class ConfiViewController {
 	
@@ -26,6 +24,8 @@ public class ConfiViewController {
 	CrudVendedorViewController crudVendedorViewController;
 	ObservableList<Vendedor> listaVendedoresData = FXCollections.observableArrayList();
 	ArrayList<VendedorViewController> vendedorControllers = new ArrayList<>();
+	
+	String pathImage;
 
 	@FXML
 	private TabPane tabPane;
@@ -78,14 +78,21 @@ public class ConfiViewController {
 	@FXML
 	void insertarFotoPerfilAction(ActionEvent event) {
   
-		FileChooser open = new FileChooser();
-		Stage stage = (Stage)main.getScene().getWindow();
-		File file = open.showOpenDialog(stage);
+		FileChooser fileChooser = new FileChooser();
+		
+		
+		
+		// Agregar filtros para facilitar la busqueda
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+        File file = fileChooser.showOpenDialog(aplicacion.getPrimaryStage());
 		if (file != null){
 			Image image = new Image(file.toURI().toString(), 300, 300, false, true);
 			circleImagenPerfilInicio.setFill(new ImagePattern(image));
-		}else{
-			System.out.println("No existe el archivo");
+			pathImage = file.getAbsolutePath();
 		}
 	}
 
@@ -98,7 +105,7 @@ public class ConfiViewController {
 		aler.showAndWait();
 	}
 
-	private boolean validarDatosVendedor(String nombre, String apellido, String cedula, String direccion) {
+	private boolean validarDatosVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage2) {
 
 		String mensaje = "";
 
@@ -132,10 +139,10 @@ public class ConfiViewController {
 	  String direccion = txtDireccionVendedor.getText();
 	  
 	  //2. Validar la informacion
-	  if (validarDatosVendedor(nombre, apellido, cedula, direccion) == true) {
+	  if (validarDatosVendedor(nombre, apellido, cedula, direccion, pathImage) == true) {
 		  
 		  Vendedor vendedor = null;
-		  vendedor = crudVendedorViewController.crearVendedor(nombre, apellido, cedula, direccion);
+		  vendedor = crudVendedorViewController.crearVendedor(nombre, apellido, cedula, direccion, pathImage);
 		  
 		  if (vendedor != null) {
 			  listaVendedoresData.add(vendedor);
@@ -176,6 +183,7 @@ public class ConfiViewController {
         txtApellidoVendedor.setText("");
         txtCedulaVendedor.setText("");
         txtDireccionVendedor.setText("");
+        circleImagenPerfilInicio.setFill(null);
 		
 	}
 
@@ -203,10 +211,10 @@ public class ConfiViewController {
 				// crear tab
 				Tab tab = new Tab("Vendedor "+ vendedor.getNombre(), loader.load());
 				// Guardar controlador
-				VendedorViewController controller = loader.getController();
+				VendedorViewController vendedorViewController = loader.getController();
 				// Pasar el vendedor al nuevo controlador para cargar datos
-				controller.setVendedor(vendedor);
-				vendedorControllers.add(controller);
+				vendedorViewController.setVendedor(vendedor);
+				vendedorControllers.add(vendedorViewController);
 				//add to tapPane
 				tabPane.getTabs().add(tab);
 			}catch (IOException e){

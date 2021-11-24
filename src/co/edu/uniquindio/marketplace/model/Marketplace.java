@@ -149,7 +149,7 @@ public class Marketplace implements IMarketplaceService, Serializable {
 		return productoEncontrado;
 	}
 
-	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) throws VendedorException {
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage) throws VendedorException {
 
 		Vendedor nuevoVendedor = null;
 		boolean flagVendedorExiste = false;
@@ -166,6 +166,7 @@ public class Marketplace implements IMarketplaceService, Serializable {
 			nuevoVendedor.setApellido(apellido);
 			nuevoVendedor.setCedula(cedula);
 			nuevoVendedor.setDireccion(direccion);
+			nuevoVendedor.setImagen(pathImage);
 			getListaVendedores().add(nuevoVendedor);
 
 		}

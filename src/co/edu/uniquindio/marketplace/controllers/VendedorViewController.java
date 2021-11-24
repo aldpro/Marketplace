@@ -21,6 +21,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 
@@ -29,10 +30,12 @@ public class VendedorViewController {
         Aplicacion aplicacion;
         ModelFactoryController modelFactoryController;
         CrudProductoViewController crudProductoViewController;
+        ConfiViewController confiViewController;
 
         ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
         Producto productoSeleccionado;
         FilteredList<Producto> filtrarDatosProducto;
+        
         String pathImagen;
 
         private Vendedor vendedor;
@@ -173,6 +176,7 @@ public class VendedorViewController {
         void cambiarImagenPerfilAction(ActionEvent event) {
 
         }
+        
         @FXML
         void seleccionarImagenAction(ActionEvent event) {
                 FileChooser fileChooser = new FileChooser();
@@ -477,9 +481,10 @@ public class VendedorViewController {
         }
 
         public void setVendedor(Vendedor vendedor){
+        	Image im = new Image(vendedor.getImagen());
                 this.vendedor = vendedor;
                 this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
-//                this.circleImagenPerfil.setFill(vendedor.getImagen());
+                this.circleImagenPerfil.setFill(new ImagePattern(im));
                 //TODO: Cargara datos del vendedor
         }
 }

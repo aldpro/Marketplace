@@ -34,9 +34,9 @@ public class CrudVendedorViewController {
 		this.aplicacion = aplicacion;
 	}
 	
-	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage) {
 
-		return modelFactoryController.crearVendedor(nombre,apellido,cedula,direccion);
+		return modelFactoryController.crearVendedor(nombre,apellido,cedula,direccion,pathImage);
 	}
 	public void guardarDatos() {
 		modelFactoryController.guardarResourceXML();

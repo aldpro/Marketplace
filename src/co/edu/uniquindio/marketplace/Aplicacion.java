@@ -20,37 +20,6 @@ public class Aplicacion extends Application {
 		mostrarVentanaPrincipal();
 	}
 
-	/*
-	@Override
-	public void start(Stage stage) {
-		TabPane tabPane = new TabPane();
-		ArrayList<VendedorController> controllerArrayList = new ArrayList<>();
-
-		for (int i = 0; i < 5; i++) {
-			//Don't just load it into the new node save a reference
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("view/vendedor.fxml"));
-			try {
-				//Load it into the new parent node
-				Tab tab = new Tab("Tab:"+i, loader.load());
-				//Save contoller to arraylist of controllers
-				controllerArrayList.add(loader.getController());
-				//Add to tabPane
-				tabPane.getTabs().add(tab);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		//Do some stuff with your contollers
-		int index = 0;
-
-
-		Scene scene = new Scene(tabPane);
-		stage = new Stage();
-		stage.setScene(scene);
-		stage.show();
-	}*/
-
 	public static void main(String[] args) {
 		launch(args);
 	}

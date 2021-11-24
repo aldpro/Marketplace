@@ -11,13 +11,14 @@ public class Vendedor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private String nombre, apellido, cedula, direccion;
+	private String nombre, apellido, cedula, direccion,imagen;
 	ArrayList<Producto> listaProductos = new ArrayList<>();
 	ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<>();
 	
 	public Vendedor() {
 		
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -54,6 +55,15 @@ public class Vendedor implements Serializable{
 	public void setListaVendedoresAliados(ArrayList<Vendedor> listaVendedoresAliados) {
 		this.listaVendedoresAliados = listaVendedoresAliados;
 	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
 	
 
 

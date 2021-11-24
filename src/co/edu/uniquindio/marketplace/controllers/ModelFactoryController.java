@@ -37,20 +37,21 @@ public class ModelFactoryController implements IModelFactoryService{
 //			iniciarSalvarDatosPrueba();
 //			
 			//2. cargar los datos de los archivos
-			cargarDatosDesdeArchivos();
+//			cargarDatosDesdeArchivos();
 			
 			//3. Guardar y cargar el recurso serializable Binario
 //			guardarResourceBinario();
-			cargarResourceBinario();
+//			cargarResourceBinario();
 			
 			
 			//4. Guardar y cargar el recurso serializable XML
-//			guardarResourceXML();
+			
 			cargarResourceXML();
 			
 			if (marketplace == null){
 				System.out.println("es null");
-//				inicializarDatos();
+				inicializarDatosProductos();
+				guardarResourceXML();
 			}
 			//Registar la accion de inicio de sesion
 			registrarAccionesSistema("Inicio de sesion del usuario: Alejandro", 1, "Inicio de sesion");
@@ -62,7 +63,7 @@ public class ModelFactoryController implements IModelFactoryService{
 			Persistencia.guardaRegistroLog(mensaje, nivel, accion);
 		}
 		
-	private void inicializarDatos() {
+	private void inicializarDatosProductos() {
 
 		marketplace = new Marketplace();
 
@@ -147,12 +148,12 @@ public class ModelFactoryController implements IModelFactoryService{
 		return marketplace.getListaProductos();
 	}
 	
-	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion) {
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage) {
 
 		Vendedor vendedor = null;
 
 		try {
-			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion);
+			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion,pathImage);
 		} catch (VendedorException e) {
 			e.getMessage();
 		}
@@ -165,7 +166,7 @@ public class ModelFactoryController implements IModelFactoryService{
 
 	public void iniciarSalvarDatosPrueba() {
 	
-		inicializarDatos();
+		
 		try{
 			Persistencia.guardarProductos(getMarketplace().getListaProductos());	
 			
