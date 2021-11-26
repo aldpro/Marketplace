@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,15 +15,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E3FEFD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E3FEFD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.controllers.loginViewController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #79F1EC;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../Downloads/kisspng-computer-icons-black-white-retail-shopping-icon-5b07d0f96792a4.6702304915272389054243.png" />
-               </image>
-            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="13.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
             <Label layoutX="41.0" layoutY="88.0" text="MARKETPLACE">
                <font>
                   <Font name="System Bold" size="18.0" />
@@ -30,11 +31,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="430.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="59.0" layoutX="164.0" layoutY="34.0">
-               <image>
-                  <Image url="@../../../../../../../../../Downloads/locked-padlock.png" />
-               </image>
-            </ImageView>
+            <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="164.0" layoutY="26.0" />
             <Label layoutX="155.0" layoutY="122.0" text="Usuario">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -48,7 +45,7 @@
             <TextField layoutX="120.0" layoutY="259.0" promptText="Ingrese usuario" />
             <PasswordField fx:id="txtContrasenaLogin" layoutX="120.0" layoutY="259.0" promptText="Ingrese contraseña" />
             <TextField fx:id="txtUsuarioLogin" layoutX="120.0" layoutY="175.0" promptText="Ingrese usuario" />
-            <Button fx:id="btnIngresarLogin" layoutX="165.0" layoutY="319.0" mnemonicParsing="false" onAction="#userLogin" text="Ingresar" />
+            <Button fx:id="btnIngresarLogin" layoutX="165.0" layoutY="319.0" mnemonicParsing="false" onAction="#userLoginAction" text="Ingresar" />
             <Label fx:id="LblError" layoutX="177.0" layoutY="95.0" />
          </children></AnchorPane>
    </right>
