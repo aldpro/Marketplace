@@ -2,41 +2,54 @@ package co.edu.uniquindio.marketplace.model;
 
 public class Usuario {
 
-	private String usuario, contrasena;
+	private Vendedor vendedor;
+	private String view;
+	private String rol;
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
-
 	
-	public Usuario(String usuario, String contrasena) {
-		
-		this.usuario = usuario;
-		this.contrasena = contrasena;
+
+
+	public Usuario(Vendedor vendedor, String view, String rol) {
+		super();
+		this.vendedor = vendedor;
+		this.view = view;
+		this.rol = rol;
 	}
 
 
-	public String getUsuario() {
-		return usuario;
+
+	public String getView() {
+		return view;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+
+	public void setView(String view) {
+		this.view = view;
 	}
 
-	public String getContrasena() {
-		return contrasena;
+
+	public Vendedor getVendedor() {
+		return vendedor;
 	}
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [usuario=" + usuario + ", contrasena=" + contrasena + "]";
+
+	public String getRol() {
+		return rol;
 	}
-	
-	
+
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+
 	
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import co.edu.uniquindio.marketplace.Aplicacion;
+import co.edu.uniquindio.marketplace.model.Usuario;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,8 @@ public class ConfiViewController {
 	ArrayList<VendedorViewController> vendedorControllers = new ArrayList<>();
 	
 	String pathImage;
+	
+	Usuario usuario;
 
 	@FXML
 	private TabPane tabPane;
@@ -74,7 +77,15 @@ public class ConfiViewController {
 				controller.setAplicacion(aplicacion);
 			}
 	}
-  
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@FXML
 	void crearVendedorAction(ActionEvent event) {
   
@@ -206,8 +217,16 @@ public class ConfiViewController {
     	modelFactoryController = ModelFactoryController.getInstance();
     	crudVendedorViewController = new CrudVendedorViewController(modelFactoryController);
     	inicializarVendedor();
+    	
 //    	colocarImagenBoton();
     }
+	
+	public void refrescarTab(){
+		if (usuario.getRol().equals("vendedor")){
+			tabPane.getTabs().remove(0);
+		}
+		
+	}
 	
 	public ObservableList<Vendedor> getListaVendedoresData() {
         listaVendedoresData.addAll(crudVendedorViewController.obtenerVendedores());

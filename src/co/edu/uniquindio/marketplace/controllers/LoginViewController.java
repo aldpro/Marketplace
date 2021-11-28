@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplace.Aplicacion;
 import co.edu.uniquindio.marketplace.exceptions.LoginException;
+import co.edu.uniquindio.marketplace.model.Usuario;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class LoginViewController {
@@ -28,7 +27,7 @@ public class LoginViewController {
 	Vendedor vendedor;
 	ModelFactoryController modelFactoryController;
 	Stage configStage;
-	Object controller;
+	ConfiViewController confiViewController;
 	
     @FXML
     private ResourceBundle resources;
@@ -53,22 +52,23 @@ public class LoginViewController {
     	String usuario = txtUsuarioLogin.getText();
     	String contrasena = txtContrasenaLogin.getText();
     	try {
-			String view = modelFactoryController.autenticarUsuario(usuario, contrasena);
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(view));
+			Usuario u = modelFactoryController.autenticarUsuario(usuario, contrasena);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(u.getView()));
 			
 			Scene scene = new Scene(loader.load(), 600, 400);
 	        Stage stage = new Stage();
 	        stage.setTitle("New Window");
 	        stage.setScene(scene);
-	        controller=loader.getController();
-			if (controller instanceof ConfiViewController){
-				ConfiViewController confiViewController = (ConfiViewController)controller;
-				confiViewController.setAplicacion(aplicacion);
-			}
-			if (controller instanceof VendedorViewController){
-				VendedorViewController vendedorViewController = (VendedorViewController)controller;
-				vendedorViewController.setAplicacion(aplicacion);
-			}
+	        
+			
+			ConfiViewController confiViewController = (ConfiViewController)loader.getController();
+			confiViewController.setAplicacion(aplicacion);
+			confiViewController.setUsuario(u);
+			confiViewController.refrescarTab();
+			stage.setOnCloseRequest(event1 -> {
+				  aplicacion.showPrimaryStage();
+			});
+			
 	        stage.show();
 			aplicacion.hidePrimaryStage();
 		} catch (LoginException e) {

@@ -17,7 +17,6 @@ import co.edu.uniquindio.marketplace.exceptions.UsuarioExcepcion;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Producto;
-import co.edu.uniquindio.marketplace.model.Usuario;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 
 

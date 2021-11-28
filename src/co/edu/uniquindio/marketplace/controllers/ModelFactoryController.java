@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import co.edu.uniquindio.marketplace.exceptions.VendedorException;
 import co.edu.uniquindio.marketplace.model.Marketplace;
 import co.edu.uniquindio.marketplace.model.Producto;
+import co.edu.uniquindio.marketplace.model.Usuario;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import co.edu.uniquindio.marketplace.model.services.IModelFactoryService;
 import co.edu.uniquindio.marketplace.persistencia.Persistencia;
@@ -165,21 +166,20 @@ public class ModelFactoryController implements IModelFactoryService{
 		return marketplace.getListaVendedores();
 	}
 
-	public String autenticarUsuario(String usuario, String contrasena) throws LoginException {
+	public Usuario autenticarUsuario(String usuario, String contrasena) throws LoginException {
 		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
 		if (usuario.equals("admin")&&contrasena.equals("admin")){
-			return "../view/ConfiView.fxml";
+			return new Usuario(null,"../view/ConfiView.fxml","admin");
 		}
     	for (Vendedor vendedor : listaVendedores) {
 			if (usuario.equals(vendedor.getUsuario())&&contrasena.equals(vendedor.getContrasena())){
-				return "../view/ConfiView.fxml";
+				return new Usuario(vendedor,"../view/ConfiView.fxml", "vendedor");
 			}
 		}
 		throw new LoginException("El usuario o contraseña es inválido");
 	}
 	
-	public void iniciarSalvarDatosPrueba() {
-		
+	public void iniciarSalvarDatosPrueba() {	
 		try{
 			Persistencia.guardarProductos(getMarketplace().getListaProductos());	
 			
