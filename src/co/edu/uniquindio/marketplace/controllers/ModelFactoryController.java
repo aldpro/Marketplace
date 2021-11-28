@@ -9,6 +9,7 @@ import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.Vendedor;
 import co.edu.uniquindio.marketplace.model.services.IModelFactoryService;
 import co.edu.uniquindio.marketplace.persistencia.Persistencia;
+import co.edu.uniquindio.marketplace.exceptions.LoginException;
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 
@@ -148,12 +149,12 @@ public class ModelFactoryController implements IModelFactoryService{
 		return marketplace.getListaProductos();
 	}
 	
-	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage) {
+	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage, String usuario, String contrasena) {
 
 		Vendedor vendedor = null;
 
 		try {
-			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion,pathImage);
+			vendedor = getMarketplace().crearVendedor(nombre, apellido, cedula, direccion,pathImage,usuario,contrasena);
 		} catch (VendedorException e) {
 			e.getMessage();
 		}
@@ -164,8 +165,20 @@ public class ModelFactoryController implements IModelFactoryService{
 		return marketplace.getListaVendedores();
 	}
 
-	public void iniciarSalvarDatosPrueba() {
+	public String autenticarUsuario(String usuario, String contrasena) throws LoginException {
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+		if (usuario.equals("admin")&&contrasena.equals("admin")){
+			return "../view/ConfiView.fxml";
+		}
+    	for (Vendedor vendedor : listaVendedores) {
+			if (usuario.equals(vendedor.getUsuario())&&contrasena.equals(vendedor.getContrasena())){
+				return "../view/ConfiView.fxml";
+			}
+		}
+		throw new LoginException("El usuario o contraseña es inválido");
+	}
 	
+	public void iniciarSalvarDatosPrueba() {
 		
 		try{
 			Persistencia.guardarProductos(getMarketplace().getListaProductos());	
@@ -204,8 +217,5 @@ public class ModelFactoryController implements IModelFactoryService{
 
 		marketplace = Persistencia.cargarRecursoMarketplaceXML();
 	}
-
-	
-
 
 }

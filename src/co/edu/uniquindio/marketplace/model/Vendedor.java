@@ -11,7 +11,7 @@ public class Vendedor implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	private String nombre, apellido, cedula, direccion,imagen;
+	private String nombre, apellido, cedula, direccion,imagen, usuario, contrasena;
 	ArrayList<Producto> listaProductos = new ArrayList<>();
 	ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<>();
 	
@@ -59,9 +59,26 @@ public class Vendedor implements Serializable{
 	public String getImagen() {
 		return imagen;
 	}
+	
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	
 	

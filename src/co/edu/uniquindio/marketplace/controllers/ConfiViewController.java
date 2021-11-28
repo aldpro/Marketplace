@@ -35,6 +35,12 @@ public class ConfiViewController {
 
 	@FXML
 	private TextField txtNombreVendedor;
+	
+	@FXML
+	private TextField txtUsuarioVendedor;
+	
+	@FXML
+	private TextField txtContrasenaVendedor;
   
 	@FXML
 	private TextField txtApellidoVendedor;
@@ -105,7 +111,7 @@ public class ConfiViewController {
 		aler.showAndWait();
 	}
 
-	private boolean validarDatosVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage2) {
+	private boolean validarDatosVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage2, String usuario, String contrasena) {
 
 		String mensaje = "";
 
@@ -121,11 +127,17 @@ public class ConfiViewController {
 
 		if(direccion == null || direccion.equals(""))
 			mensaje += "La categoria es invalida \n" ;
+		
+		if(usuario == null || usuario.equals(""))
+			mensaje += "El usuario o contraseña es invalido \n" ;
+		
+		if(contrasena == null || contrasena.equals(""))
+			mensaje += "El usuario o contraseña es invalido \n" ;
 
 		if(mensaje.equals("")){
 			return true;
 		}else{
-			mostrarMensaje("NotificaciÃ³n Vendedor","Datos invalidos",mensaje, Alert.AlertType.WARNING);
+			mostrarMensaje("Notificación Vendedor","Datos invalidos",mensaje, Alert.AlertType.WARNING);
 			return false;
 		}
 	}
@@ -137,12 +149,14 @@ public class ConfiViewController {
 	  String apellido = txtApellidoVendedor.getText();
 	  String cedula  = txtCedulaVendedor.getText();
 	  String direccion = txtDireccionVendedor.getText();
+	  String usuario = txtUsuarioVendedor.getText();
+	  String contrasena = txtContrasenaVendedor.getText();
 	  
 	  //2. Validar la informacion
-	  if (validarDatosVendedor(nombre, apellido, cedula, direccion, pathImage) == true) {
+	  if (validarDatosVendedor(nombre, apellido, cedula, direccion, pathImage,usuario,contrasena)) {
 		  
 		  Vendedor vendedor = null;
-		  vendedor = crudVendedorViewController.crearVendedor(nombre, apellido, cedula, direccion, pathImage);
+		  vendedor = crudVendedorViewController.crearVendedor(nombre, apellido, cedula, direccion, pathImage, usuario, contrasena);
 		  
 		  if (vendedor != null) {
 			  listaVendedoresData.add(vendedor);

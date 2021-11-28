@@ -41,6 +41,10 @@
                       <Circle fx:id="circleImagenPerfilInicio" fill="#eceff2" layoutX="670.0" layoutY="130.0" radius="46.0" stroke="BLACK" strokeType="INSIDE" />
                       <Button fx:id="btnInsertarFotoPerfil" layoutX="606.0" layoutY="218.0" mnemonicParsing="false" onAction="#insertarFotoPerfilAction" text="Insertar foto de perfil" />
                       <Button fx:id="btnCrearVendedor" layoutX="616.0" layoutY="485.0" mnemonicParsing="false" onAction="#crearVendedorAction" text="Añadir Vendedor" />
+                        <Label layoutX="307.0" layoutY="422.0" text="Usuario:" />
+                        <TextField fx:id="txtUsuarioVendedor" layoutX="400.0" layoutY="416.0" prefHeight="25.0" prefWidth="200.0" />
+                        <Label layoutX="698.0" layoutY="420.0" text="Contraseña:" />
+                        <TextField fx:id="txtContrasenaVendedor" layoutX="802.0" layoutY="417.0" prefHeight="25.0" prefWidth="200.0" />
                    </children>
                 </AnchorPane>
             </content>

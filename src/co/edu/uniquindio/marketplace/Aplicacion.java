@@ -1,12 +1,12 @@
 package co.edu.uniquindio.marketplace;
 	
 import java.io.IOException;
-import co.edu.uniquindio.marketplace.controllers.ConfiViewController;
+import co.edu.uniquindio.marketplace.controllers.LoginViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 
 public class Aplicacion extends Application {
@@ -30,11 +30,11 @@ public class Aplicacion extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Aplicacion.class.getResource("view/ConfiView.fxml"));
-			AnchorPane rootLayout = (AnchorPane) loader.load();
-			ConfiViewController confiViewController = loader.getController();
+			loader.setLocation(Aplicacion.class.getResource("view/LoginView.fxml"));
+			BorderPane rootLayout = (BorderPane) loader.load();
+			LoginViewController loginViewController = loader.getController();
 
-			confiViewController.setAplicacion(this);
+			loginViewController.setAplicacion(this);
 			
 
 			// Show the scene containing the root layout.
@@ -47,6 +47,12 @@ public class Aplicacion extends Application {
 		}
 	}
 
+	public void hidePrimaryStage(){
+		primaryStage.hide();
+	}
+	public void showPrimaryStage(){
+		primaryStage.show();
+	}
 	public Stage getPrimaryStage() {
 		return primaryStage;
 	}

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E3FEFD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.controllers.loginViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E3FEFD;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.controllers.LoginViewController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #79F1EC;" BorderPane.alignment="CENTER">
          <children>
@@ -31,10 +31,7 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="430.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="164.0" layoutY="26.0">
-               <image>
-                  <Image url="C:\td\Imagenes\candado.png" />
-               </image></ImageView>
+            <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="164.0" layoutY="26.0" />
             <Label layoutX="155.0" layoutY="122.0" text="Usuario">
                <font>
                   <Font name="System Bold" size="20.0" />
