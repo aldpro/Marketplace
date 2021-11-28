@@ -31,7 +31,10 @@
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="430.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="164.0" layoutY="26.0" />
+            <ImageView fitHeight="56.0" fitWidth="59.0" layoutX="164.0" layoutY="26.0">
+               <image>
+                  <Image url="C:\td\Imagenes\candado.png" />
+               </image></ImageView>
             <Label layoutX="155.0" layoutY="122.0" text="Usuario">
                <font>
                   <Font name="System Bold" size="20.0" />
