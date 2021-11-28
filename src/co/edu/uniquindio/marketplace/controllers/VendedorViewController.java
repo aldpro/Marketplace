@@ -481,11 +481,15 @@ public class VendedorViewController {
         }
 
         public void setVendedor(Vendedor vendedor){
-//        	Image im = new Image(vendedor.getImagen());
-                this.vendedor = vendedor;
-                this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());
-//                this.circleImagenPerfil.setFill(new ImagePattern(im));
-                //TODO: Cargara datos del vendedor
+        	if (vendedor.getImagen()!=null){
+        		File file = new File(vendedor.getImagen());
+            	Image image = new Image(file.toURI().toString(), 300, 300, false, true);
+    			this.circleImagenPerfil.setFill(new ImagePattern(image));
+        	}
+            this.vendedor = vendedor;
+            this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());    
+            //TODO: Cargara datos del vendedor
+                
         }
 }
 

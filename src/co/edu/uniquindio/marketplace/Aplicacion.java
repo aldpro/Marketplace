@@ -55,5 +55,4 @@ public class Aplicacion extends Application {
 		this.primaryStage = primaryStage;
 	}
 
-	
 }
