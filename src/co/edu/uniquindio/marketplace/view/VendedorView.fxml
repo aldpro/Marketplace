@@ -33,35 +33,34 @@
             </Label>
                                 <TableView fx:id="tableAsociados" layoutX="329.0" layoutY="110.0" prefHeight="162.0" prefWidth="250.0">
                                     <columns>
-                                        <TableColumn prefWidth="116.0" text="Nombre(s)" />
-                                        <TableColumn prefWidth="133.0" text="Apellidos" />
+                                        <TableColumn fx:id="clNombreVendedorAsociado" prefWidth="116.0" text="Nombre(s)" />
+                                        <TableColumn fx:id="clApellidoVendedorAsociado" prefWidth="133.0" text="Apellidos" />
                                     </columns>
                                 </TableView>
                                 <TableView fx:id="tableSolicitudes" layoutX="698.0" layoutY="118.0" prefHeight="162.0" prefWidth="250.0">
                                     <columns>
-                                        <TableColumn prefWidth="119.0" text="Nombre(s)" />
-                                        <TableColumn prefWidth="130.0" text="Dirección" />
+                                        <TableColumn fx:id="clNombreSolicitud" prefWidth="119.0" text="Nombre(s)" />
+                                        <TableColumn fx:id="clDireccionSolicitud" prefWidth="130.0" text="Dirección" />
                                     </columns>
                                 </TableView>
                                 <TableView fx:id="tableNoAsociados" layoutX="1064.0" layoutY="118.0" prefHeight="162.0" prefWidth="250.0">
                                     <columns>
-                                        <TableColumn prefWidth="116.0" text="Nombre(s)" />
-                                        <TableColumn prefWidth="133.0" text="Apellido(s)" />
+                                        <TableColumn fx:id="clNombreVendedor" prefWidth="116.0" text="Nombre(s)" />
+                                        <TableColumn fx:id="clApellidoVendedor" prefWidth="133.0" text="Apellido(s)" />
                                     </columns>
                                 </TableView>
                                 <Button fx:id="btnAceptarSolicitud" layoutX="730.0" layoutY="288.0" mnemonicParsing="false" onAction="#aceptarSolicitudAction" text="Aceptar" />
                                 <Button fx:id="btnRechazarSolicitud" layoutX="857.0" layoutY="288.0" mnemonicParsing="false" onAction="#rechazarSolicitudAction" text="Rechazar" />
-                                <Button fx:id="btnEnviarSolicitud" layoutX="1126.0" layoutY="288.0" mnemonicParsing="false" text="Enviar solicitud" />
+                                <Button fx:id="btnEnviarSolicitud" layoutX="1126.0" layoutY="288.0" mnemonicParsing="false" onAction="#enviarSolicitudAction" text="Enviar solicitud" />
                                 <Label layoutX="1126.0" layoutY="66.0" text="Buscar:" />
                                 <TextField fx:id="txtBuscarVendedores" layoutX="1179.0" layoutY="62.0" prefHeight="25.0" prefWidth="135.0" />
-                                <Separator layoutX="631.0" layoutY="55.0" orientation="VERTICAL" prefHeight="270.0" prefWidth="6.0" />
                                 <Label fx:id="lblNombreVendedor" layoutX="89.0" layoutY="14.0" text="######">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
                                 <Label layoutX="327.0" layoutY="90.0" text="Tabla de vendedores asociados:" />
-                                <Label layoutX="698.0" layoutY="98.0" text="Solicitudes de vendedores asociados:" />
+                                <Label layoutX="698.0" layoutY="98.0" text="Solicitudes de vendedores:" />
                                 <Label layoutX="1064.0" layoutY="98.0" text="Lista de vendedores no asociados" />
                                 <Button fx:id="btnFotoPerfil" layoutX="86.0" layoutY="150.0" mnemonicParsing="false" onAction="#cambiarImagenPerfilAction" text="Cambiar foto de perfil" />
                                 <Label layoutX="316.0" layoutY="36.0" text="Contactos:">
@@ -91,7 +90,6 @@
                                 <Button fx:id="btnAddProducto" layoutX="707.0" layoutY="634.0" mnemonicParsing="false" onAction="#addProductoAction" text="Añadir producto" />
                                 <Button fx:id="btnActualizarProducto" layoutX="945.0" layoutY="634.0" mnemonicParsing="false" onAction="#actualizarProductoAction" text="Actualizar producto" />
                                 <Button fx:id="btnEliminarProducto" layoutX="1024.0" layoutY="569.0" mnemonicParsing="false" onAction="#eliminarProductoAction" text="Eliminar producto" />
-                                <Separator layoutX="475.0" layoutY="616.0" prefHeight="3.0" prefWidth="891.0" />
                                 <TableView fx:id="tableProductos" layoutX="840.0" layoutY="380.0" prefHeight="176.0" prefWidth="479.0">
                                     <columns>
                                         <TableColumn fx:id="clNombreProducto" prefWidth="137.0" text="Nombre" />
@@ -110,11 +108,9 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
-                                <Separator layoutX="794.0" layoutY="323.0" orientation="VERTICAL" prefHeight="294.0" prefWidth="6.0" />
-            <Separator layoutX="1002.0" layoutY="55.0" orientation="VERTICAL" prefHeight="270.0" prefWidth="6.0" />
             <Separator layoutX="304.0" layoutY="53.0" prefHeight="3.0" prefWidth="1063.0" />
             <Separator layoutX="301.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="6.0" />
-            <Separator layoutX="448.0" layoutY="322.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
+            <Separator layoutX="448.0" layoutY="322.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="6.0" />
             <Label layoutX="22.0" layoutY="330.0" text="Muro de publicaciones:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />

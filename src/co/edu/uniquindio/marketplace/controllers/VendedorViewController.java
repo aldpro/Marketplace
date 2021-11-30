@@ -102,19 +102,59 @@ public class VendedorViewController {
 
         @FXML
         private Button btnAceptarSolicitud;
+        
+        @FXML
+        private Button btnEnviarSolicitud;
 
 //    @FXML
 //    private Button btnMeGusta;
 
+        //Table con vendedores no asociados 
         @FXML
-        private TableView<?> tableNoAsociados;
+        private TableView<Vendedor> tableNoAsociados;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clNombreVendedor;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clApellidoVendedor;
+        
+        @FXML
+        void enviarSolicitudAction(ActionEvent event) {
+
+        }
+
+        //Tabla de solicitudes
+        @FXML
+        private TableView<Vendedor> tableSolicitudes;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clNombreSolicitud;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clDireccionSolicitud;
+        
+        @FXML
+        void aceptarSolicitudAction(ActionEvent event) {
+
+        }
 
         @FXML
-        private TableView<?> tableSolicitudes;
+        void rechazarSolicitudAction(ActionEvent event) {
 
+        }
+
+        //Tabla vendedores asociados
         @FXML
-        private TableView<?> tableAsociados;
+        private TableView<Vendedor> tableAsociados;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clNombreVendedorAsociado;
+        
+        @FXML
+        private TableColumn<Vendedor, String> clApellidoVendedorAsociado;
 
+        //Tabla productos
         @FXML
         private TableView<Producto> tableProductos;
 
@@ -163,16 +203,6 @@ public class VendedorViewController {
         }
 
         @FXML
-        void aceptarSolicitudAction(ActionEvent event) {
-
-        }
-
-        @FXML
-        void rechazarSolicitudAction(ActionEvent event) {
-
-        }
-
-        @FXML
         void cambiarImagenPerfilAction(ActionEvent event) {
 
         }
@@ -205,12 +235,20 @@ public class VendedorViewController {
                 modelFactoryController = ModelFactoryController.getInstance();
                 crudProductoViewController = new CrudProductoViewController(modelFactoryController);
                 inicializarProductoView();
+                inicializarVendedoresNoAsociados();
 //    	colocarImagenBoton();
         }
 
 
 
-        private void inicializarProductoView() {
+        private void inicializarVendedoresNoAsociados() {
+        	
+        	this.clNombreVendedor.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            this.clApellidoVendedor.setCellValueFactory(new PropertyValueFactory<>("apellido"));
+        	tableNoAsociados.setItems(confiViewController.getListaVendedoresData());
+		}
+
+		private void inicializarProductoView() {
                 this.clCategoriaProducto.setCellValueFactory(new PropertyValueFactory<>("categoria"));
                 this.clEstadoProducto.setCellValueFactory(new PropertyValueFactory<>("estadoProducto"));
                 this.clNombreProducto.setCellValueFactory(new PropertyValueFactory<>("nombre"));
