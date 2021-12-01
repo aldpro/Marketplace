@@ -12,8 +12,10 @@ public class Vendedor implements Serializable{
 	
 	
 	private String nombre, apellido, cedula, direccion,imagen, usuario, contrasena;
+	ArrayList<Vendedor> listaSolicitudesEnviadas = new ArrayList<>();
 	ArrayList<Producto> listaProductos = new ArrayList<>();
-	ArrayList<Vendedor> listaVendedoresAliados = new ArrayList<>();
+	ArrayList<Vendedor> listaVendedoresSolicitudes = new ArrayList<>();
+	ArrayList<Vendedor> listaVendedoresAsociados = new ArrayList<>();
 	
 	public Vendedor() {
 		
@@ -49,11 +51,30 @@ public class Vendedor implements Serializable{
 	public void setListaProductos(ArrayList<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
-	public ArrayList<Vendedor> getListaVendedoresAliados() {
-		return listaVendedoresAliados;
+
+	public ArrayList<Vendedor> getListaVendedoresSolicitudes() {
+		return listaVendedoresSolicitudes;
 	}
-	public void setListaVendedoresAliados(ArrayList<Vendedor> listaVendedoresAliados) {
-		this.listaVendedoresAliados = listaVendedoresAliados;
+
+	public void setListaVendedoresSolicitudes(ArrayList<Vendedor> listaVendedoresSolicitudes) {
+		this.listaVendedoresSolicitudes = listaVendedoresSolicitudes;
+	}
+
+	public ArrayList<Vendedor> getListaVendedoresAsociados() {
+		return listaVendedoresAsociados;
+	}
+
+	public void setListaVendedoresAsociados(ArrayList<Vendedor> listaVendedoresAsociados) {
+		this.listaVendedoresAsociados = listaVendedoresAsociados;
+	}
+	
+
+	public ArrayList<Vendedor> getListaSolicitudesEnviadas() {
+		return listaSolicitudesEnviadas;
+	}
+
+	public void setListaSolicitudesEnviadas(ArrayList<Vendedor> listaSolicitudesEnviadas) {
+		this.listaSolicitudesEnviadas = listaSolicitudesEnviadas;
 	}
 
 	public String getImagen() {

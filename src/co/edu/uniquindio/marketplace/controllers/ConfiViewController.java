@@ -184,6 +184,7 @@ public class ConfiViewController {
 				  // Pasar el vendedor al nuevo controlador para cargar datos
 				  controller.setVendedor(vendedor);
 				  controller.setAplicacion(aplicacion);
+				  refrescarVendedoresNoAsociados();
 				  vendedorControllers.add(controller);
 				  //Add to tabPane
 				  tabPane.getTabs().add(tab);
@@ -203,12 +204,19 @@ public class ConfiViewController {
 	  
   }
 
+	private void refrescarVendedoresNoAsociados(){
+		for (VendedorViewController vendedorViewController : vendedorControllers) {
+			vendedorViewController.refrescarVendedoresNoAsociados();
+		}
+	}
 	private void limpiarCamposVendedores() {
 		txtNombreVendedor.setText("");
         txtApellidoVendedor.setText("");
         txtCedulaVendedor.setText("");
         txtDireccionVendedor.setText("");
         circleImagenPerfilInicio.setFill(null);
+        txtUsuarioVendedor.setText("");
+        txtContrasenaVendedor.setText("");
 		
 	}
 

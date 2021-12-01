@@ -55,7 +55,7 @@ public class LoginViewController {
 			Usuario u = modelFactoryController.autenticarUsuario(usuario, contrasena);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(u.getView()));
 			
-			Scene scene = new Scene(loader.load(), 600, 400);
+			Scene scene = new Scene(loader.load(), 1366, 700);
 	        Stage stage = new Stage();
 	        stage.setTitle("New Window");
 	        stage.setScene(scene);

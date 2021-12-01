@@ -16,9 +16,11 @@ import co.edu.uniquindio.marketplace.model.EstadoProducto;
 
 
 
-public class ModelFactoryController implements IModelFactoryService{
+public class ModelFactoryController implements IModelFactoryService, Runnable{
 	
 	Marketplace marketplace;
+	Thread hiloGuardarResourceXML;
+	BoundedSemaphore semaforo;
 	
 	//------------------------------  Singleton ------------------------------------------------
 		// Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -58,6 +60,7 @@ public class ModelFactoryController implements IModelFactoryService{
 			//Registar la accion de inicio de sesion
 			registrarAccionesSistema("Inicio de sesion del usuario: Alejandro", 1, "Inicio de sesion");
 			
+			semaforo = new BoundedSemaphore(1);
 		}
 
 		
@@ -162,8 +165,24 @@ public class ModelFactoryController implements IModelFactoryService{
 		return vendedor;
 	}
 	public ArrayList<Vendedor> obtenerVendedores() {
-		// TODO Auto-generated method stub
 		return marketplace.getListaVendedores();
+	}
+	
+	public ArrayList<Vendedor> obtenerVendedoresNoAsociados(Vendedor vendedorPrincipal) {
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+		ArrayList<Vendedor>listaVendedoresNoAsociados = new ArrayList<>();
+		
+		for (Vendedor vendedor : listaVendedores) {
+			
+			if( ! vendedorPrincipal.getListaVendedoresAsociados().contains(vendedor) 
+					&& ! vendedorPrincipal.getListaVendedoresSolicitudes().contains(vendedor)
+					&& ! vendedorPrincipal.getListaSolicitudesEnviadas().contains(vendedor)
+					&& ! vendedor.getCedula().equals(vendedorPrincipal.getCedula())){
+				listaVendedoresNoAsociados.add(vendedor);
+			}
+		}
+		return listaVendedoresNoAsociados;
+		
 	}
 
 	public Usuario autenticarUsuario(String usuario, String contrasena) throws LoginException {
@@ -210,12 +229,31 @@ public class ModelFactoryController implements IModelFactoryService{
 	
 	public void guardarResourceXML() {
 
-		Persistencia.guardarRecursoMarketplaceXML(marketplace);
+		hiloGuardarResourceXML = new Thread(this);
+		hiloGuardarResourceXML.start();
+		
 	}
 	
 	public void cargarResourceXML() {
 
 		marketplace = Persistencia.cargarRecursoMarketplaceXML();
+	}
+
+	@Override
+	public void run() {
+
+		Thread hiloActual = Thread.currentThread();
+		
+		try {
+			semaforo.ocupar();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (hiloActual==hiloGuardarResourceXML){
+			Persistencia.guardarRecursoMarketplaceXML(marketplace);
+		}
 	}
 
 }

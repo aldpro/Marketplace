@@ -25,9 +25,15 @@ public class CrudVendedorViewController {
 	public void setMarketplace (Marketplace marketplace) {
 		this.marketplace = marketplace;
 	}
+	
 	public ArrayList<Vendedor> obtenerVendedores() {
 		
 		return modelFactoryController.obtenerVendedores();
+	}
+	
+	public ArrayList<Vendedor> obtenerVendedoresNoAsociados(Vendedor vendedor) {
+		
+		return modelFactoryController.obtenerVendedoresNoAsociados(vendedor);
 	}
 	
 	public void setAplicacion(Aplicacion aplicacion) {

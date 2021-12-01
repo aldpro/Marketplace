@@ -30,15 +30,18 @@ public class VendedorViewController {
         Aplicacion aplicacion;
         ModelFactoryController modelFactoryController;
         CrudProductoViewController crudProductoViewController;
+        CrudVendedorViewController crudVendedorViewController;
         ConfiViewController confiViewController;
-
+        ObservableList<Vendedor> listaVendedoresNoAsociadosData = FXCollections.observableArrayList();
         ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
         Producto productoSeleccionado;
+        
         FilteredList<Producto> filtrarDatosProducto;
         
-        String pathImagen;
+        String pathImagen, pathImagenVendedor;
 
         private Vendedor vendedor;
+        private Vendedor vendedorNoAsociadoSeleccionado;
 
         @FXML
         private TabPane tabPane;
@@ -121,7 +124,8 @@ public class VendedorViewController {
         
         @FXML
         void enviarSolicitudAction(ActionEvent event) {
-
+        	vendedorNoAsociadoSeleccionado.getListaVendedoresSolicitudes().add(vendedor);
+        	vendedor.getListaSolicitudesEnviadas().add(vendedorNoAsociadoSeleccionado);
         }
 
         //Tabla de solicitudes
@@ -205,6 +209,25 @@ public class VendedorViewController {
         @FXML
         void cambiarImagenPerfilAction(ActionEvent event) {
 
+        	FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Buscar Imagen");
+
+            // Agregar filtros para facilitar la busqueda
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("All Images", "*.*"),
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png")
+            );
+
+            // Obtener la imagen seleccionada
+            File imgFile = fileChooser.showOpenDialog(aplicacion.getPrimaryStage());
+
+            // Mostar la imagen
+            if (imgFile != null) {
+                    Image image = new Image("file:" + imgFile.getAbsolutePath());
+                    circleImagenPerfil.setFill(new ImagePattern(image));
+                    pathImagenVendedor = imgFile.getAbsolutePath();
+            }
         }
         
         @FXML
@@ -234,8 +257,9 @@ public class VendedorViewController {
         void initialize() {
                 modelFactoryController = ModelFactoryController.getInstance();
                 crudProductoViewController = new CrudProductoViewController(modelFactoryController);
+                crudVendedorViewController = new CrudVendedorViewController(modelFactoryController);
                 inicializarProductoView();
-                inicializarVendedoresNoAsociados();
+
 //    	colocarImagenBoton();
         }
 
@@ -245,7 +269,12 @@ public class VendedorViewController {
         	
         	this.clNombreVendedor.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             this.clApellidoVendedor.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-        	tableNoAsociados.setItems(confiViewController.getListaVendedoresData());
+            tableNoAsociados.getItems().clear();
+        	tableNoAsociados.setItems(getListaVendedoresNoAsociadosData());
+        	
+        	  tableNoAsociados.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+                  vendedorNoAsociadoSeleccionado = newSelection;
+          });
 		}
 
 		private void inicializarProductoView() {
@@ -352,10 +381,24 @@ public class VendedorViewController {
         public void setProductoSeleccionado(Producto productoSeleccionado) {
                 this.productoSeleccionado = productoSeleccionado;
         }
+        
+        public ObservableList<Vendedor> getListaVendedoresNoAsociadosData() {
+        	listaVendedoresNoAsociadosData.addAll(crudVendedorViewController.obtenerVendedoresNoAsociados(vendedor));
+			return listaVendedoresNoAsociadosData;
+		}
+
+		public void setListaVendedoresNoAsociadosData(ObservableList<Vendedor> listaVendedoresNoAsociadosData) {
+			this.listaVendedoresNoAsociadosData = listaVendedoresNoAsociadosData;
+		}
+        
 
         //----------------------------------------------------------------------------------------------------------------------------------
 
-        private void limpiarCamposProducto() {
+       
+
+		
+
+		private void limpiarCamposProducto() {
                 txtNombreProducto.setText("");
                 txtCategoriaProducto.setText("");
                 txtPrecioProducto.setText("");
@@ -517,6 +560,9 @@ public class VendedorViewController {
                 limpiarCamposProducto();
 
         }
+        public void refrescarVendedoresNoAsociados(){
+        	inicializarVendedoresNoAsociados();
+        }
 
         public void setVendedor(Vendedor vendedor){
         	if (vendedor.getImagen()!=null){
@@ -525,9 +571,11 @@ public class VendedorViewController {
     			this.circleImagenPerfil.setFill(new ImagePattern(image));
         	}
             this.vendedor = vendedor;
-            this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());    
-            //TODO: Cargara datos del vendedor
+            this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());  
+            inicializarVendedoresNoAsociados();
+            
                 
         }
+
 }
 
