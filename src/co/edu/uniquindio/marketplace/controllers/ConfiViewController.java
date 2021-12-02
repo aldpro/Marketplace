@@ -184,6 +184,7 @@ public class ConfiViewController {
 				  // Pasar el vendedor al nuevo controlador para cargar datos
 				  controller.setVendedor(vendedor);
 				  controller.setAplicacion(aplicacion);
+				  controller.setConfiViewController(this);
 				  refrescarVendedoresNoAsociados();
 				  vendedorControllers.add(controller);
 				  //Add to tabPane
@@ -255,13 +256,24 @@ public class ConfiViewController {
 				VendedorViewController vendedorViewController = loader.getController();
 				// Pasar el vendedor al nuevo controlador para cargar datos
 				vendedorViewController.setVendedor(vendedor);
-				vendedorControllers.add(vendedorViewController);
+				  vendedorViewController.setAplicacion(aplicacion);
+				  vendedorViewController.setConfiViewController(this);
+				  refrescarVendedoresNoAsociados();
+				  vendedorControllers.add(vendedorViewController);
 				//add to tapPane
 				tabPane.getTabs().add(tab);
 			}catch (IOException e){
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void refrescarSolicitudes() {
+		
+		for (VendedorViewController vendedorController : vendedorControllers) {
+			vendedorController.refrescarListaSolicitudes();
+		}
+		
 	}
 	
 	

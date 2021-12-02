@@ -7,9 +7,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplace.Aplicacion;
+import co.edu.uniquindio.marketplace.exceptions.SolicitudVendedorException;
 import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 import co.edu.uniquindio.marketplace.model.Vendedor;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -34,6 +36,7 @@ public class VendedorViewController {
         ConfiViewController confiViewController;
         ObservableList<Vendedor> listaVendedoresNoAsociadosData = FXCollections.observableArrayList();
         ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
+        ObservableList<Vendedor> listaSolicitudesData = FXCollections.observableArrayList();
         Producto productoSeleccionado;
         
         FilteredList<Producto> filtrarDatosProducto;
@@ -42,6 +45,7 @@ public class VendedorViewController {
 
         private Vendedor vendedor;
         private Vendedor vendedorNoAsociadoSeleccionado;
+        private Vendedor solicitudSeleccionado;
 
         @FXML
         private TabPane tabPane;
@@ -123,9 +127,21 @@ public class VendedorViewController {
         private TableColumn<Vendedor, String> clApellidoVendedor;
         
         @FXML
+        private TableColumn<Vendedor, String> clSolicitudEnviada;
+        
+        @FXML
         void enviarSolicitudAction(ActionEvent event) {
-        	vendedorNoAsociadoSeleccionado.getListaVendedoresSolicitudes().add(vendedor);
-        	vendedor.getListaSolicitudesEnviadas().add(vendedorNoAsociadoSeleccionado);
+        	
+        	try {
+				crudVendedorViewController.enviarSolicitud(vendedor, vendedorNoAsociadoSeleccionado);
+				confiViewController.refrescarSolicitudes();
+	        	refrescarVendedoresNoAsociados();
+			} catch (SolicitudVendedorException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				mostrarMensaje("Error", "Error", e.getMessage(), AlertType.ERROR);
+			}
+        	
         }
 
         //Tabla de solicitudes
@@ -269,13 +285,25 @@ public class VendedorViewController {
         	
         	this.clNombreVendedor.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             this.clApellidoVendedor.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-            tableNoAsociados.getItems().clear();
+            
+            this.clSolicitudEnviada.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getListaVendedoresSolicitudes().contains(vendedor) ? "si" : "no" ));            tableNoAsociados.getItems().clear();
         	tableNoAsociados.setItems(getListaVendedoresNoAsociadosData());
         	
         	  tableNoAsociados.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
                   vendedorNoAsociadoSeleccionado = newSelection;
           });
 		}
+        
+        private void inicializarSolicitudesVendedores() {
+        	this.clNombreSolicitud.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+            this.clDireccionSolicitud.setCellValueFactory(new PropertyValueFactory<>("direccion"));
+            tableSolicitudes.getItems().clear();
+        	tableSolicitudes.setItems(getListaSolicitudesData());
+        	
+        	  tableSolicitudes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+                  solicitudSeleccionado = newSelection;
+          });
+        }
 
 		private void inicializarProductoView() {
                 this.clCategoriaProducto.setCellValueFactory(new PropertyValueFactory<>("categoria"));
@@ -390,11 +418,26 @@ public class VendedorViewController {
 		public void setListaVendedoresNoAsociadosData(ObservableList<Vendedor> listaVendedoresNoAsociadosData) {
 			this.listaVendedoresNoAsociadosData = listaVendedoresNoAsociadosData;
 		}
-        
+		
+		public ObservableList<Vendedor> getListaSolicitudesData() {
+			listaSolicitudesData.addAll(crudVendedorViewController.obtenerSolicitudesVendedores(vendedor));
+			return listaSolicitudesData;
+		}
 
+		public void setListaSolicitudesData(ObservableList<Vendedor> listaSolicitudesData) {
+			this.listaSolicitudesData = listaSolicitudesData;
+		}
+        
+		public ConfiViewController getConfiViewController() {
+			return confiViewController;
+		}
+
+		public void setConfiViewController(ConfiViewController confiViewController) {
+			this.confiViewController = confiViewController;
+		}
         //----------------------------------------------------------------------------------------------------------------------------------
 
-       
+		
 
 		
 
@@ -573,9 +616,15 @@ public class VendedorViewController {
             this.vendedor = vendedor;
             this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());  
             inicializarVendedoresNoAsociados();
+            inicializarSolicitudesVendedores();
             
                 
         }
+
+		public void refrescarListaSolicitudes() {
+			inicializarSolicitudesVendedores();
+			
+		}
 
 }
 

@@ -12,6 +12,7 @@ import co.edu.uniquindio.marketplace.model.services.IModelFactoryService;
 import co.edu.uniquindio.marketplace.persistencia.Persistencia;
 import co.edu.uniquindio.marketplace.exceptions.LoginException;
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
+import co.edu.uniquindio.marketplace.exceptions.SolicitudVendedorException;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
 
 
@@ -176,15 +177,52 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			
 			if( ! vendedorPrincipal.getListaVendedoresAsociados().contains(vendedor) 
 					&& ! vendedorPrincipal.getListaVendedoresSolicitudes().contains(vendedor)
-					&& ! vendedorPrincipal.getListaSolicitudesEnviadas().contains(vendedor)
 					&& ! vendedor.getCedula().equals(vendedorPrincipal.getCedula())){
 				listaVendedoresNoAsociados.add(vendedor);
 			}
 		}
 		return listaVendedoresNoAsociados;
-		
+	}
+	
+	public ArrayList<Vendedor> obtenerSolicitudesVendedores(Vendedor vendedorPrincipal) {
+		return vendedorPrincipal.getListaVendedoresSolicitudes();
 	}
 
+	public void enviarSolicitud(Vendedor vendedorPrincipal, Vendedor vendedor) throws SolicitudVendedorException{
+		
+		if (vendedor.getListaVendedoresSolicitudes().contains(vendedorPrincipal)){
+    		throw new SolicitudVendedorException("Ya tiene una solicitud");
+    	}
+    	
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+
+		
+		for (Vendedor vendedor2 : listaVendedores) {
+			
+			if (vendedorPrincipal.getCedula().equals(vendedor2.getCedula())){
+				vendedor2.getListaSolicitudesEnviadas().add(buscarVendedor(vendedor.getCedula()));
+				
+			}
+			if (vendedor.getCedula().equals(vendedor2.getCedula())){
+				vendedor2.getListaVendedoresSolicitudes().add(buscarVendedor(vendedorPrincipal.getCedula()));
+			}
+		}
+		
+		
+	}
+	
+	public Vendedor buscarVendedor(String cedula){
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+
+		for (Vendedor vendedor : listaVendedores) {
+			if (cedula.equals(vendedor.getCedula())){
+				return vendedor;
+			}
+			
+		}
+		return null;
+	}
+	
 	public Usuario autenticarUsuario(String usuario, String contrasena) throws LoginException {
 		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
 		if (usuario.equals("admin")&&contrasena.equals("admin")){
@@ -255,5 +293,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			Persistencia.guardarRecursoMarketplaceXML(marketplace);
 		}
 	}
+
+	
 
 }
