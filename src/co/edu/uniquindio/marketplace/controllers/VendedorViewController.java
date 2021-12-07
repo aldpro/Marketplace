@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace.controllers;
 
+import java.awt.Choice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -37,6 +38,7 @@ public class VendedorViewController {
         ObservableList<Vendedor> listaVendedoresNoAsociadosData = FXCollections.observableArrayList();
         ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
         ObservableList<Vendedor> listaSolicitudesData = FXCollections.observableArrayList();
+        ObservableList<Vendedor> listaVendedoresAsociadosData = FXCollections.observableArrayList();
         Producto productoSeleccionado;
         
         FilteredList<Producto> filtrarDatosProducto;
@@ -113,8 +115,8 @@ public class VendedorViewController {
         @FXML
         private Button btnEnviarSolicitud;
 
-//    @FXML
-//    private Button btnMeGusta;
+	    @FXML
+	    private Button btnMeGusta;
 
         //Table con vendedores no asociados 
         @FXML
@@ -156,15 +158,24 @@ public class VendedorViewController {
         
         @FXML
         void aceptarSolicitudAction(ActionEvent event) {
-
+        	aceptarSolicitud();
+        	confiViewController.refrescarVendedoresAsociados();
+        	refrescarListaSolicitudes();
+        	refrescarVendedoresNoAsociados();
+        	
         }
 
-        @FXML
+		@FXML
         void rechazarSolicitudAction(ActionEvent event) {
 
+			rechazarSolicitud();
+			confiViewController.refrescarSolicitudes();
+			refrescarListaSolicitudes();
+			
         }
 
-        //Tabla vendedores asociados
+
+		//Tabla vendedores asociados
         @FXML
         private TableView<Vendedor> tableAsociados;
         
@@ -275,18 +286,25 @@ public class VendedorViewController {
                 crudProductoViewController = new CrudProductoViewController(modelFactoryController);
                 crudVendedorViewController = new CrudVendedorViewController(modelFactoryController);
                 inicializarProductoView();
-
-//    	colocarImagenBoton();
+//                colocarImagenBoton();
+//                btnMeGusta.setDisable(true);
+                
         }
 
 
+        private void inicializarVendedoresAsociados() {
+        	this.clNombreVendedorAsociado.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        	this.clApellidoVendedorAsociado.setCellValueFactory(new PropertyValueFactory<>("apellido"));
+        	tableAsociados.getItems().clear();
+        	tableAsociados.setItems(getListaVendedoresAsociadosData());
+        }
 
         private void inicializarVendedoresNoAsociados() {
         	
         	this.clNombreVendedor.setCellValueFactory(new PropertyValueFactory<>("nombre"));
             this.clApellidoVendedor.setCellValueFactory(new PropertyValueFactory<>("apellido"));
-            
-            this.clSolicitudEnviada.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getListaVendedoresSolicitudes().contains(vendedor) ? "si" : "no" ));            tableNoAsociados.getItems().clear();
+            this.clSolicitudEnviada.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getListaVendedoresSolicitudes().contains(vendedor) ? "si" : "no" )); 
+            tableNoAsociados.getItems().clear();
         	tableNoAsociados.setItems(getListaVendedoresNoAsociadosData());
         	
         	  tableNoAsociados.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
@@ -344,11 +362,11 @@ public class VendedorViewController {
 
         }
 
-//	private void colocarImagenBoton(){
-//		URL linkMeGusta = getClass().getResource("/Info/like.jpg");
-//		Image imagenLike = new Image(linkMeGusta.toString(),24,24,false,true);
-//		btnMeGusta.setGraphic(new ImageView(imagenLike));
-//	}
+//		private void colocarImagenBoton(){
+//			URL linkMeGusta = getClass().getResource("C:/td/Imagenes/like.jpg");
+//			Image imagenLike = new Image(linkMeGusta.toString(),24,24,false,true);
+//			btnMeGusta.setGraphic(new ImageView(imagenLike));
+//		}
 
         private void mostrarInformacionProducto(Producto productoSeleccionado, Image image) {
 
@@ -435,7 +453,21 @@ public class VendedorViewController {
 		public void setConfiViewController(ConfiViewController confiViewController) {
 			this.confiViewController = confiViewController;
 		}
+		
+		public ObservableList<Vendedor> getListaVendedoresAsociadosData() {
+			listaVendedoresAsociadosData.addAll(crudVendedorViewController.obtenerVendedoresAsociados(vendedor));
+			return listaVendedoresAsociadosData;
+		}
+
+		public void setListaVendedoresAsociadosData(ObservableList<Vendedor> listaVendedoresAsociadosData) {
+			this.listaVendedoresAsociadosData = listaVendedoresAsociadosData;
+		}
+		
         //----------------------------------------------------------------------------------------------------------------------------------
+
+		
+
+		
 
 		
 
@@ -539,7 +571,7 @@ public class VendedorViewController {
 
                 if(productoSeleccionado != null) {
 
-                        if(mostrarMensajeConfirmacion("ï¿½Estï¿½ seguro de eliminar el producto seleccionado?")== true) {
+                        if(mostrarMensajeConfirmacion("¿Está seguro de eliminar el producto seleccionado?")== true) {
 
                                 productoEliminado = crudProductoViewController.eliminarProducto(productoSeleccionado.getNombre());
 
@@ -559,7 +591,7 @@ public class VendedorViewController {
 
                 }else {
 
-                        mostrarMensaje("Notificaciï¿½n de producto", "Producto no seleccionado", "Seleccione un producto de la lista", AlertType.WARNING);
+                        mostrarMensaje("Notificación de producto", "Producto no seleccionado", "Seleccione un producto de la lista", AlertType.WARNING);
                 }
 
         }
@@ -592,7 +624,7 @@ public class VendedorViewController {
                                         mostrarMensaje("Notificacion de producto", "Producto no actualizado", "El producto no se ha actualizado con exito", AlertType.INFORMATION);
                                 }
                         }else {
-                                mostrarMensaje("Notificacion de producto", "Producto no actualizado", "Los datos ingresados son invï¿½lidos", AlertType.ERROR);
+                                mostrarMensaje("Notificacion de producto", "Producto no actualizado", "Los datos ingresados son invalidos", AlertType.ERROR);
 
                         }
                 }
@@ -617,12 +649,53 @@ public class VendedorViewController {
             this.lblNombreVendedor.setText(vendedor.getNombre() + " " + vendedor.getApellido());  
             inicializarVendedoresNoAsociados();
             inicializarSolicitudesVendedores();
+            inicializarVendedoresAsociados();
             
-                
         }
 
 		public void refrescarListaSolicitudes() {
 			inicializarSolicitudesVendedores();
+			
+		}
+		
+		private void aceptarSolicitud() {
+
+			boolean solicitudAceptada= false;
+			if (solicitudSeleccionado!=null){
+				solicitudAceptada = crudVendedorViewController.aceptarSolicitud(vendedor, solicitudSeleccionado);
+				
+				if (solicitudAceptada==true){
+					tableAsociados.refresh();
+					tableSolicitudes.refresh();
+				}else{
+					  mostrarMensaje("Notificacion de Solicitud", "Solicitud no aceptada", "No se ha podido aceptar la solicitud", AlertType.INFORMATION);
+				}
+				
+			}else{
+				  mostrarMensaje("Notificación de Tabla", "Vendedor no seleccionado", "Seleccione un Vendedor de la lista", AlertType.WARNING);
+			}
+		}
+
+		public void refrescarVendedoresAsociados() {
+
+			inicializarVendedoresAsociados();
+		}
+
+        private void rechazarSolicitud() {
+        	boolean solicitudRechazada = false;
+        	if (solicitudSeleccionado!=null){
+				solicitudRechazada = crudVendedorViewController.rechazarSolicitud(vendedor, solicitudSeleccionado);
+				
+				if (solicitudRechazada==true){
+					tableAsociados.refresh();
+					tableSolicitudes.refresh();
+				}else{
+					  mostrarMensaje("Notificacion de Solicitud", "Solicitud no aceptada", "No se ha podido aceptar la solicitud", AlertType.INFORMATION);
+				}
+				
+			}else{
+				  mostrarMensaje("Notificación de Tabla", "Vendedor no seleccionado", "Seleccione un Vendedor de la lista", AlertType.WARNING);
+			}
 			
 		}
 

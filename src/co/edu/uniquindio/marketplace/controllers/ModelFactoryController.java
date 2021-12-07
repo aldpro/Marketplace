@@ -196,7 +196,6 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
     	
 		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
 
-		
 		for (Vendedor vendedor2 : listaVendedores) {
 			
 			if (vendedorPrincipal.getCedula().equals(vendedor2.getCedula())){
@@ -206,9 +205,45 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			if (vendedor.getCedula().equals(vendedor2.getCedula())){
 				vendedor2.getListaVendedoresSolicitudes().add(buscarVendedor(vendedorPrincipal.getCedula()));
 			}
+		}	
+	}
+	
+	public boolean aceptarSolicitud(Vendedor vendedorPrincipal, Vendedor solicitudSeleccionado) {
+		boolean flagAceptado=false;
+		
+		if (solicitudSeleccionado.getListaSolicitudesEnviadas().contains(vendedorPrincipal)){
+    		vendedorPrincipal.getListaVendedoresSolicitudes().remove(solicitudSeleccionado);
+    	}
+		
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+
+		for (Vendedor vendedor2 : listaVendedores) {
+			
+			if (vendedorPrincipal.getCedula().equals(vendedor2.getCedula())){
+				vendedor2.getListaVendedoresAsociados().add(buscarVendedor(solicitudSeleccionado.getCedula()));
+				obtenerVendedoresNoAsociados(vendedorPrincipal).remove(solicitudSeleccionado);
+				flagAceptado=true;
+			}
+			if (solicitudSeleccionado.getCedula().equals(vendedor2.getCedula())){
+				vendedor2.getListaVendedoresAsociados().add(buscarVendedor(vendedorPrincipal.getCedula()));
+				obtenerVendedoresNoAsociados(solicitudSeleccionado).remove(vendedorPrincipal);
+				flagAceptado = true;
+			}
 		}
-		
-		
+		return flagAceptado;
+	}
+	
+	public boolean rechazarSolicitud(Vendedor vendedorPrincipal, Vendedor solicitudSeleccionado) {
+		boolean flagRechazar = false;
+		if (solicitudSeleccionado.getListaSolicitudesEnviadas().contains(vendedorPrincipal)){
+			vendedorPrincipal.getListaVendedoresSolicitudes().remove(solicitudSeleccionado);
+			flagRechazar = true;
+		}
+		return flagRechazar;
+	}
+	
+	public ArrayList<Vendedor> obtenerVendedoresAsociados(Vendedor vendedorPrincipal) {
+		return vendedorPrincipal.getListaVendedoresAsociados();
 	}
 	
 	public Vendedor buscarVendedor(String cedula){
@@ -293,6 +328,12 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			Persistencia.guardarRecursoMarketplaceXML(marketplace);
 		}
 	}
+
+	
+
+	
+
+	
 
 	
 

@@ -273,8 +273,13 @@ public class ConfiViewController {
 		for (VendedorViewController vendedorController : vendedorControllers) {
 			vendedorController.refrescarListaSolicitudes();
 		}
+	}
+
+	public void refrescarVendedoresAsociados() {
+		for (VendedorViewController vendedorViewController : vendedorControllers) {
+			vendedorViewController.refrescarVendedoresAsociados();
+		}
 		
 	}
-	
 	
 }
