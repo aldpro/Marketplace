@@ -62,7 +62,32 @@ public class ConfiViewController {
   
 	@FXML
 	private Circle circleImagenPerfilInicio;
+	
+	//Tab de estadisticas------------------------------------------------------------------------------------------------------------------
+	
+	@FXML
+	private TextField txtUsuarioVendedorEstadistica;
+	
+	@FXML
+	private TextField txtCantidadProductosPublicados;
+	
+	@FXML
+	private TextField txtCantidadContactos;
+	
+	@FXML
+	private TextField txtCantidadProductosPublicadosFecha;
+	
+	//tabla de top
+	@FXML
+    private TableView<?> tableTopProductos;
+	
+	@FXML
+	private TableColumn<?, ?> columnTop;
+	
+	@FXML
+    private TableColumn<?, ?> columnProducto;
 
+	
 	public ConfiViewController() {
 
 	}

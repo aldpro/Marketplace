@@ -1,6 +1,5 @@
 package co.edu.uniquindio.marketplace.controllers;
 
-import java.awt.Choice;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -59,6 +58,9 @@ public class VendedorViewController {
         private ImageView ivImagenProducto;
 
         @FXML
+        private ImageView ivImagenProductoMuro;
+        
+        @FXML
         private ResourceBundle resources;
 
         @FXML
@@ -114,9 +116,45 @@ public class VendedorViewController {
         
         @FXML
         private Button btnEnviarSolicitud;
+        
+        @FXML
+        private Button btnPublicarProducto;
+        
+        //Muro de publicaciones
 
+        @FXML
+        private TableView<Producto> tableMuro;
+        
+        @FXML
+        private TableColumn<Producto, String> columnNombreMuro;
+        
+        @FXML
+        private TableColumn<Producto, String> columnCategoriaMuro;
+        
+        @FXML
+        private TableColumn<Producto, String> columnPrecioMuro;
+        
+        @FXML
+        private TableColumn<Producto, String> columnEstadoMuro;
+        
+        @FXML
+        private TableColumn<Producto, String> columnFechaPublicacion;
+        
 	    @FXML
 	    private Button btnMeGusta;
+	    
+	    @FXML
+	    private Button btnComentar;
+	    
+	    @FXML
+        void darMeGustaAction(ActionEvent event) {
+        	
+        }
+	    
+	    @FXML
+        void comentarAction(ActionEvent event) {
+	    	
+        }
 
         //Table con vendedores no asociados 
         @FXML
@@ -203,7 +241,12 @@ public class VendedorViewController {
 
         @FXML
         private TableColumn<Producto, String> clEstadoProducto;
-
+        
+        //PUBLICAR PRODUCTO------------------------------------------------------------------------------------------------------------------------
+        @FXML
+        void PublicarProductoAction(ActionEvent event) {
+                crearProducto();
+        }
 
         //CREAR- Aï¿½ADIR PRODUCTO-----------------------------------------------------------------------------------------------------------
 
@@ -582,9 +625,9 @@ public class VendedorViewController {
                                         crudProductoViewController.registrarAccion("El producto se ha eliminado con exito",1, "Eliminar producto");
                                         tableProductos.getSelectionModel().clearSelection();
                                         limpiarCamposProducto();
-                                        mostrarMensaje("Notificaciï¿½n de producto", "Producto eliminado", "El producto se ha eliminado con ï¿½xito", AlertType.INFORMATION);
+                                        mostrarMensaje("Notificación de producto", "Producto eliminado", "El producto se ha eliminado con exito", AlertType.INFORMATION);
                                 }else {
-                                        mostrarMensaje("Notificaciï¿½n de producto", "Producto no eliminado", "El producto no se puede eliminado con ï¿½xito", AlertType.ERROR);
+                                        mostrarMensaje("Notificación de producto", "Producto no eliminado", "El producto no se puede eliminado con exito", AlertType.ERROR);
                                 }
 
                         }
@@ -631,7 +674,7 @@ public class VendedorViewController {
         }
 
         private void nuevoProducto() {
-                mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <aï¿½adir producto>.", AlertType.INFORMATION);
+                mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <añadir producto>.", AlertType.INFORMATION);
                 limpiarCamposProducto();
 
         }

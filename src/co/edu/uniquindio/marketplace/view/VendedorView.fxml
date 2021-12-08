@@ -69,13 +69,13 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
-                                <VBox layoutX="619.0" layoutY="363.0" prefHeight="223.0" prefWidth="160.0" spacing="6.0">
+                                <VBox layoutX="619.0" layoutY="363.0" prefHeight="232.0" prefWidth="160.0" spacing="6.0">
                                     <children>
                                         <TextField fx:id="txtNombreProducto" />
                                         <TextField fx:id="txtCategoriaProducto" layoutX="10.0" layoutY="60.0" />
                                         <TextField fx:id="txtPrecioProducto" layoutX="10.0" layoutY="85.0" prefHeight="19.0" prefWidth="176.0" />
-                                        <ComboBox fx:id="cbEstadoProducto" prefHeight="25.0" prefWidth="253.0" />
-                                        <ImageView fx:id="ivImagenProducto" fitHeight="77.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
+                                        <ComboBox fx:id="cbEstadoProducto" prefHeight="30.0" prefWidth="160.0" />
+                                        <ImageView fx:id="ivImagenProducto" fitHeight="75.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true" />
                                         <Button fx:id="btnSeleccionarImagen" mnemonicParsing="false" onAction="#seleccionarImagenAction" prefHeight="27.0" prefWidth="161.0" text="Seleccionar imagen:" />
                                     </children>
                                 </VBox>
@@ -90,7 +90,7 @@
                                 </VBox>
                                 <Button fx:id="btnAddProducto" layoutX="707.0" layoutY="634.0" mnemonicParsing="false" onAction="#addProductoAction" text="Añadir producto" />
                                 <Button fx:id="btnActualizarProducto" layoutX="945.0" layoutY="634.0" mnemonicParsing="false" onAction="#actualizarProductoAction" text="Actualizar producto" />
-                                <Button fx:id="btnEliminarProducto" layoutX="1024.0" layoutY="569.0" mnemonicParsing="false" onAction="#eliminarProductoAction" text="Eliminar producto" />
+                                <Button fx:id="btnEliminarProducto" layoutX="914.0" layoutY="574.0" mnemonicParsing="false" onAction="#eliminarProductoAction" prefHeight="25.0" prefWidth="120.0" text="Eliminar producto" />
                                 <TableView fx:id="tableProductos" layoutX="840.0" layoutY="380.0" prefHeight="176.0" prefWidth="479.0">
                                     <columns>
                                         <TableColumn fx:id="clNombreProducto" prefWidth="137.0" text="Nombre" />
@@ -117,6 +117,18 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
+            <TableView fx:id="tableMuro" layoutX="51.0" layoutY="439.0" prefHeight="170.0" prefWidth="368.0">
+              <columns>
+                <TableColumn fx:id="columnNombreMuro" prefWidth="103.0" text="Nombre" />
+                <TableColumn fx:id="columnCategoriaMuro" prefWidth="97.0" text="Categoría" />
+                  <TableColumn fx:id="columnPrecioMuro" prefWidth="85.0" text="Precio" />
+                  <TableColumn fx:id="columnEstadoMuro" prefWidth="83.0" text="Estado" />
+              </columns>
+            </TableView>
+            <Button fx:id="btnMeGusta" layoutX="261.0" layoutY="634.0" mnemonicParsing="false" onAction="#darMeGustaAction" text="Me gusta" />
+            <ImageView fx:id="ivImagenProductoMuro" fitHeight="92.0" fitWidth="160.0" layoutX="236.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="btnComentar" layoutX="113.0" layoutY="634.0" mnemonicParsing="false" onAction="#comentarAction" text="Comentar" />
+            <Button fx:id="btnPublicarProducto" layoutX="1114.0" layoutY="574.0" mnemonicParsing="false" onAction="#PublicarProductoAction" prefHeight="25.0" prefWidth="120.0" text="Publicar" />
                             </children>
                         </AnchorPane>
     </children>

@@ -17,6 +17,7 @@ public class Marketplace implements IMarketplaceService, Serializable {
 	
 	ArrayList<Vendedor> listaVendedores = new ArrayList<>(); //Limitada a una red de m�ximo 10 vendedores
 	ArrayList<Producto> listaProductos = new ArrayList<>();
+	ArrayList<Producto> listaPublicaciones = new ArrayList<>();
 
 	public Marketplace() {
 		
