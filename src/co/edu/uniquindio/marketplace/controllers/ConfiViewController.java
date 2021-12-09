@@ -77,7 +77,7 @@ public class ConfiViewController {
 	@FXML
 	private TextField txtCantidadProductosPublicadosFecha;
 	
-	//tabla de top
+	//tabla de top-----------------------------------------------------------------------------------------------------------------------
 	@FXML
     private TableView<?> tableTopProductos;
 	
@@ -137,6 +137,25 @@ public class ConfiViewController {
 			pathImage = file.getAbsolutePath();
 		}
 	}
+
+//	private void mostrarInformacionProducto(Producto productoSeleccionado, Image image) {
+//
+//        if(vendedorControllers != null) {
+//                txtCantidadProductosPublicados.setText(calcularProductosPublicados());
+//                txtCantidadContactos.setText(calcularCantidadContactos());
+//                
+//        }
+//	}
+//	
+//	private String calcularCantidadContactos() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	private String calcularProductosPublicados() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
 

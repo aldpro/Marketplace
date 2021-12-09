@@ -301,6 +301,8 @@ public class VendedorViewController {
                     Image image = new Image("file:" + imgFile.getAbsolutePath());
                     circleImagenPerfil.setFill(new ImagePattern(image));
                     pathImagenVendedor = imgFile.getAbsolutePath();
+                    vendedor.setImagen(pathImagenVendedor);
+                    crudVendedorViewController.guardarDatos();
             }
         }
         

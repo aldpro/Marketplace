@@ -3,8 +3,6 @@ package co.edu.uniquindio.marketplace.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
-
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
 import co.edu.uniquindio.marketplace.exceptions.VendedorException;
 import co.edu.uniquindio.marketplace.model.services.IMarketplaceService;
@@ -119,9 +117,9 @@ public class Marketplace implements IMarketplaceService, Serializable {
 		
 		for (Vendedor vendedor2 : listaVendedores){
 			if(vendedor.getCedula().equals(vendedor2.getCedula())) {
-				for (Producto producto2 : vendedor2.getListaProductos()) {
-					if(nombre.equals(producto2)){
-						productoEncontrado = producto2;
+				for (Producto producto : vendedor.getListaProductos()) {
+					if(nombre.equals(producto.getNombre())){
+						productoEncontrado = producto;
 					}
 				}
 			}
