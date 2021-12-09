@@ -72,6 +72,10 @@ public class CrudVendedorViewController {
 		return modelFactoryController.rechazarSolicitud(vendedorPrincipal,solicitudSeleccionado);
 	}
 
+	public int calcularCantidadContactos(Vendedor vendedor, String usuario2) {
+		return modelFactoryController.calcularCantidadContactos(vendedor,usuario2);
+	}
+
 	
 	
 }

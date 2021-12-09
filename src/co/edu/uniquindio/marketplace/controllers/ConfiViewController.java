@@ -59,6 +59,9 @@ public class ConfiViewController {
 	
 	@FXML
 	private Button btnInsertarFotoPerfil;
+	
+	@FXML
+	private Button btnConsultarDatos;
   
 	@FXML
 	private Circle circleImagenPerfilInicio;
@@ -116,6 +119,12 @@ public class ConfiViewController {
   
 		crearVendedor();
 	}
+	
+	@FXML
+	void consultarDatosAction(ActionEvent event) {
+  
+		mostrarInformacionEstadistica();
+	}
   
 	@FXML
 	void insertarFotoPerfilAction(ActionEvent event) {
@@ -138,24 +147,26 @@ public class ConfiViewController {
 		}
 	}
 
-//	private void mostrarInformacionProducto(Producto productoSeleccionado, Image image) {
-//
-//        if(vendedorControllers != null) {
-//                txtCantidadProductosPublicados.setText(calcularProductosPublicados());
-//                txtCantidadContactos.setText(calcularCantidadContactos());
-//                
-//        }
-//	}
-//	
-//	private String calcularCantidadContactos() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	private String calcularProductosPublicados() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	private void mostrarInformacionEstadistica() {
+
+		String usuario = txtUsuarioVendedorEstadistica.getText();
+		for (int i = 0; i< vendedorControllers.size(); i++){
+			
+			Vendedor vendedor = listaVendedoresData.get(i);
+			txtCantidadProductosPublicados.setText(calcularProductosPublicados(vendedor,usuario));
+			txtCantidadContactos.setText(String.valueOf(calcularCantidadContactos(vendedor,usuario)));
+                
+        }
+	}
+	
+	private int calcularCantidadContactos(Vendedor vendedor, String usuario2) {
+		return crudVendedorViewController.calcularCantidadContactos(vendedor, usuario2);
+	}
+
+	private String calcularProductosPublicados(Vendedor vendedor, String usuario2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
 
@@ -301,12 +312,13 @@ public class ConfiViewController {
 				VendedorViewController vendedorViewController = loader.getController();
 				// Pasar el vendedor al nuevo controlador para cargar datos
 				vendedorViewController.setVendedor(vendedor);
-				  vendedorViewController.setAplicacion(aplicacion);
-				  vendedorViewController.setConfiViewController(this);
-				  refrescarVendedoresNoAsociados();
-				  vendedorControllers.add(vendedorViewController);
+				vendedorViewController.setAplicacion(aplicacion);
+				vendedorViewController.setConfiViewController(this);
+				refrescarVendedoresNoAsociados();
+				vendedorControllers.add(vendedorViewController);
 				//add to tapPane
 				tabPane.getTabs().add(tab);
+				
 			}catch (IOException e){
 				e.printStackTrace();
 			}

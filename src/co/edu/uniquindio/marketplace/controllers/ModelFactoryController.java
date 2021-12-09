@@ -300,6 +300,15 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 		return null;
 	}
 	
+	public int calcularCantidadContactos(Vendedor vendedor, String usuario2) {
+		int resultado=0;
+		
+		if(vendedor.getUsuario().equals(usuario2)){
+			resultado++;;
+		}
+		return resultado;
+	}
+	
 	public Usuario autenticarUsuario(String usuario, String contrasena) throws LoginException {
 		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
 		if (usuario.equals("admin")&&contrasena.equals("admin")){
@@ -370,6 +379,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			Persistencia.guardarRecursoMarketplaceXML(marketplace);
 		}
 	}
+
+	
 
 	
 
