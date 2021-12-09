@@ -138,17 +138,23 @@ public  class ArchivoUtil {
 		else{
 			mesN+=""+mes;
 		}
+		if(year < 10){
+			yearN+="0"+year;
+		}
+		else{
+			yearN+=""+year;
+		}
 
 		//		fecha_Actual+= aï¿½o+"-"+mesN+"-"+ diaN;
-		//		fechaSistema = aï¿½o+"-"+mesN+"-"+diaN+"-"+hora+"-"+minuto;
-		fechaSistema = year+"-"+mesN+"-"+diaN;
+				fechaSistema = year+"-"+mesN+"-"+diaN+"-"+hora+":"+minuto;
+//		fechaSistema = year+"-"+mesN+"-"+diaN;
 		//		horaFechaSistema = hora+"-"+minuto;
 	}
 
 	
 	
 	
-	//------------------------------------SERIALIZACIï¿½N  y XML
+	//------------------------------------SERIALIZACIÓN  y XML
 	/**
 	 * Escribe en el fichero que se le pasa el objeto que se le envia
 	 * 

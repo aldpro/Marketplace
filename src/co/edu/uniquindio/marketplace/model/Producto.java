@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketplace.model;
 
 import java.io.Serializable;
 
+
 public class Producto  implements Serializable{
 	
 	/**
@@ -14,6 +15,7 @@ public class Producto  implements Serializable{
 	private double precio;
 	private EstadoProducto estadoProducto;
 	private Vendedor vendedor;
+	private String fecha;
 	
 	public Producto() {
 		
@@ -77,5 +79,17 @@ public class Producto  implements Serializable{
 	public void setEstadoProducto(EstadoProducto estadoProducto) {
 		this.estadoProducto = estadoProducto;
 	}
+	
+	public String getFecha() {
+		return fecha;
+	}
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+	
 
 }

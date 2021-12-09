@@ -2,8 +2,6 @@ package co.edu.uniquindio.marketplace.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplace.Aplicacion;
@@ -57,7 +55,7 @@ public class LoginViewController {
 			
 			Scene scene = new Scene(loader.load(), 1366, 700);
 	        Stage stage = new Stage();
-	        stage.setTitle("New Window");
+	        stage.setTitle("Marketplace");
 	        stage.setScene(scene);
 	        
 			

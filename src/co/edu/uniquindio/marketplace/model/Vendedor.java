@@ -16,11 +16,35 @@ public class Vendedor implements Serializable{
 	ArrayList<Producto> listaProductos = new ArrayList<>();
 	ArrayList<Vendedor> listaVendedoresSolicitudes = new ArrayList<>();
 	ArrayList<Vendedor> listaVendedoresAsociados = new ArrayList<>();
+	ArrayList<Producto> listaPublicaciones = new ArrayList<>();
+	
 	
 	public Vendedor() {
 		
 	}
 	
+	public Vendedor(String nombre, String apellido, String cedula, String direccion, String imagen, String usuario,
+			String contrasena, ArrayList<Vendedor> listaSolicitudesEnviadas, ArrayList<Producto> listaProductos,
+			ArrayList<Vendedor> listaVendedoresSolicitudes, ArrayList<Vendedor> listaVendedoresAsociados,
+			ArrayList<Producto> listaPublicaciones) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.cedula = cedula;
+		this.direccion = direccion;
+		this.imagen = imagen;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+		this.listaSolicitudesEnviadas = listaSolicitudesEnviadas;
+		this.listaProductos = listaProductos;
+		this.listaVendedoresSolicitudes = listaVendedoresSolicitudes;
+		this.listaVendedoresAsociados = listaVendedoresAsociados;
+		this.listaPublicaciones = listaPublicaciones;
+		
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -76,6 +100,14 @@ public class Vendedor implements Serializable{
 	public void setListaSolicitudesEnviadas(ArrayList<Vendedor> listaSolicitudesEnviadas) {
 		this.listaSolicitudesEnviadas = listaSolicitudesEnviadas;
 	}
+	
+	public ArrayList<Producto> getListaPublicaciones() {
+		return listaPublicaciones;
+	}
+
+	public void setListaPublicaciones(ArrayList<Producto> listaPublicaciones) {
+		this.listaPublicaciones = listaPublicaciones;
+	}
 
 	public String getImagen() {
 		return imagen;
@@ -101,7 +133,6 @@ public class Vendedor implements Serializable{
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
 	}
-	
 	
 
 

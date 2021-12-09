@@ -2,6 +2,8 @@ package co.edu.uniquindio.marketplace.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Iterator;
 
 import co.edu.uniquindio.marketplace.exceptions.ProductoException;
 import co.edu.uniquindio.marketplace.exceptions.VendedorException;
@@ -14,10 +16,11 @@ public class Marketplace implements IMarketplaceService, Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	static String fechaSistema;
 	ArrayList<Vendedor> listaVendedores = new ArrayList<>(); //Limitada a una red de m�ximo 10 vendedores
 	ArrayList<Producto> listaProductos = new ArrayList<>();
-	ArrayList<Producto> listaPublicaciones = new ArrayList<>();
+	
+	
 
 	public Marketplace() {
 		
@@ -38,44 +41,35 @@ public class Marketplace implements IMarketplaceService, Serializable {
 	public void setListaProductos(ArrayList<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
+	
+	
 
 	@Override
 	public Producto crearProducto(String nombre, String categoria, double precio,
-			EstadoProducto estadoProducto, String pathImagen) throws ProductoException {
+			EstadoProducto estadoProducto, String pathImagen, Vendedor vendedor) throws ProductoException {
 
 		Producto nuevoProducto = null;
-		boolean flagProductoExiste = false;
-		
-		flagProductoExiste = verificarProductoExistente(nombre);
-		
-		if (flagProductoExiste == true) {
-			throw new ProductoException("El producto con nombre "+nombre+" no se puede crear. Ya existe");
 			
-		}else {
-			
-			nuevoProducto = new Producto();
-			nuevoProducto.setNombre(nombre);
-			nuevoProducto.setCategoria(categoria);
-			nuevoProducto.setPrecio(precio);
-			nuevoProducto.setEstadoProducto(estadoProducto);
-			nuevoProducto.setImagen(pathImagen);
-			getListaProductos().add(nuevoProducto);
-			
-		}
-		
+		nuevoProducto = new Producto();
+		nuevoProducto.setNombre(nombre);
+		nuevoProducto.setCategoria(categoria);
+		nuevoProducto.setPrecio(precio);
+		nuevoProducto.setEstadoProducto(estadoProducto);
+		nuevoProducto.setImagen(pathImagen);
+		vendedor.getListaProductos().add(nuevoProducto);
 		
 		return nuevoProducto;
 	}
 
 	@Override
 	public boolean actualizarProducto(String nombreActual, String nombre, String categoria, double precio,
-			EstadoProducto estadoProducto) {
+			EstadoProducto estadoProducto,Vendedor vendedor) {
 
 		Producto producto = null;
 		boolean productoActualizado = false;
 		
 		
-		producto=obtenerProducto(nombreActual);
+		producto=obtenerProducto(nombreActual,vendedor);
 		
 		if(producto != null) {
 			
@@ -92,16 +86,16 @@ public class Marketplace implements IMarketplaceService, Serializable {
 	}
 
 	@Override
-	public Boolean eliminarProducto(String nombre) throws ProductoException {
+	public Boolean eliminarProducto(String nombre, Vendedor vendedor) throws ProductoException {
 
 		boolean flagEliminado = false;
 		Producto producto = null;
 		
-		producto=obtenerProducto(nombre);
+		producto=obtenerProducto(nombre, vendedor);
 		
 		if(producto != null) {
 			
-			getListaProductos().remove(producto);
+			vendedor.getListaProductos().remove(producto);
 			flagEliminado = true;
 		}else {
 			throw new ProductoException("El producto con nombre "+nombre+" no se puede eliminar. No existe");
@@ -112,21 +106,6 @@ public class Marketplace implements IMarketplaceService, Serializable {
 		
 	}
 
-	@Override
-	public boolean verificarProductoExistente(String nombre) {
-
-		boolean flagProductoExiste = false;
-		
-		for (Producto producto : listaProductos) {
-			
-			if(producto.getNombre().equalsIgnoreCase(nombre)) {
-				flagProductoExiste = true;
-				break;
-			}
-		}
-		
-		return flagProductoExiste;
-	}
 
 	@Override
 	public ArrayList<Producto> obtenerProductos() {
@@ -134,15 +113,17 @@ public class Marketplace implements IMarketplaceService, Serializable {
 	}
 
 	@Override
-	public Producto obtenerProducto(String nombre) {
+	public Producto obtenerProducto(String nombre, Vendedor vendedor) {
 		
 		Producto productoEncontrado = null;
 		
-		for (Producto producto : listaProductos) {
-			
-			if(producto.getNombre().equalsIgnoreCase(nombre)) {
-				productoEncontrado = producto;
-				break;
+		for (Vendedor vendedor2 : listaVendedores){
+			if(vendedor.getCedula().equals(vendedor2.getCedula())) {
+				for (Producto producto2 : vendedor2.getListaProductos()) {
+					if(nombre.equals(producto2)){
+						productoEncontrado = producto2;
+					}
+				}
 			}
 		}
 		
@@ -173,8 +154,6 @@ public class Marketplace implements IMarketplaceService, Serializable {
 			getListaVendedores().add(nuevoVendedor);
 
 		}
-
-
 		return nuevoVendedor;
 	}
 
@@ -191,6 +170,64 @@ public class Marketplace implements IMarketplaceService, Serializable {
 
 		return flagVendedorExistente;
 	}
+
+	public Producto crearPublicacion(String nombre, String categoria, Double precio, EstadoProducto estadoProducto,
+			String pathImagen, Vendedor vendedorPrincipal, Producto productoSeleccionado) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Producto crearPublicacion(String nombre, String categoria, Double precio, EstadoProducto estadoProducto,
+			String pathImagen, Vendedor vendedor) throws ProductoException {
+		Producto nuevoProducto = null;
+			
+		cargarFechaSistema();
+		nuevoProducto = new Producto();
+		nuevoProducto.setNombre(nombre);
+		nuevoProducto.setCategoria(categoria);
+		nuevoProducto.setPrecio(precio);
+		nuevoProducto.setEstadoProducto(estadoProducto);
+		nuevoProducto.setImagen(pathImagen);
+		nuevoProducto.setFecha(fechaSistema);
+		vendedor.getListaPublicaciones().add(nuevoProducto);
+		
+		return nuevoProducto;
+	}
 	
+	private static void cargarFechaSistema() {
+
+		String diaN = "";
+		String mesN = "";
+		
+
+		Calendar cal1 = Calendar.getInstance();
+
+
+		int  dia = cal1.get(Calendar.DATE);
+		int mes = cal1.get(Calendar.MONTH)+1;
+		int year = cal1.get(Calendar.YEAR);
+		int hora = cal1.get(Calendar.HOUR);
+		int minuto = cal1.get(Calendar.MINUTE);
+
+
+		if(dia < 10){
+			diaN+="0"+dia;
+		}
+		else{
+			diaN+=""+dia;
+		}
+		if(mes < 10){
+			mesN+="0"+mes;
+		}
+		else{
+			mesN+=""+mes;
+		}
+		
+
+		//		fecha_Actual+= a�o+"-"+mesN+"-"+ diaN;
+		fechaSistema = year+"-"+mesN+"-"+diaN+"-"+hora+":"+minuto;
+//		fechaSistema = year+"-"+mesN+"-"+diaN;
+		//		horaFechaSistema = hora+"-"+minuto;
+	}
 	
 }

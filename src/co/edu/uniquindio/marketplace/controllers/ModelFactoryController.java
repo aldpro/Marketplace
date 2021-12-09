@@ -24,78 +24,94 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 	BoundedSemaphore semaforo;
 	
 	//------------------------------  Singleton ------------------------------------------------
-		// Clase estatica oculta. Tan solo se instanciara el singleton una vez
-		private static class SingletonHolder { 
-			// El constructor de Singleton puede ser llamado desde aquï¿½ al ser protected
-			private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
-		}
+	// Clase estatica oculta. Tan solo se instanciara el singleton una vez
+	private static class SingletonHolder { 
+		// El constructor de Singleton puede ser llamado desde aquï¿½ al ser protected
+		private final static ModelFactoryController eINSTANCE = new ModelFactoryController();
+	}
 
-		// Mï¿½todo para obtener la instancia de nuestra clase
-		public static ModelFactoryController getInstance() {
-			return SingletonHolder.eINSTANCE;
-		}
+	// Mï¿½todo para obtener la instancia de nuestra clase
+	public static ModelFactoryController getInstance() {
+		return SingletonHolder.eINSTANCE;
+	}
+	
+	public ModelFactoryController(){
 		
-		public ModelFactoryController() {
-			
-			
-//			//1.Inicializar datos y luego guardarlo en el archivo
-//			iniciarSalvarDatosPrueba();
-//			
-			//2. cargar los datos de los archivos
-//			cargarDatosDesdeArchivos();
-			
-			//3. Guardar y cargar el recurso serializable Binario
-//			guardarResourceBinario();
-//			cargarResourceBinario();
-			
-			
-			//4. Guardar y cargar el recurso serializable XML
-			
-			cargarResourceXML();
-			
-			if (marketplace == null){
-				System.out.println("es null");
-				inicializarDatosProductos();
-				guardarResourceXML();
-			}
-			//Registar la accion de inicio de sesion
-			registrarAccionesSistema("Inicio de sesion del usuario: Alejandro", 1, "Inicio de sesion");
-			
-			semaforo = new BoundedSemaphore(1);
+		//4. Guardar y cargar el recurso serializable XML
+		
+		cargarResourceXML();
+		
+		if (marketplace == null){
+			System.out.println("es null");
+//			inicializarDatos();
+			guardarResourceXML();
 		}
+		//Registar la accion de inicio de sesion
+		registrarAccionesSistema("Inicio de sesion del usuario: Alejandro", 1, "Inicio de sesion");
+		
+		semaforo = new BoundedSemaphore(1);
+	}
 
+	
+	public void registrarAccionesSistema(String mensaje, int nivel, String accion){
+		Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+	}
 		
-		public void registrarAccionesSistema(String mensaje, int nivel, String accion){
-			Persistencia.guardaRegistroLog(mensaje, nivel, accion);
-		}
-		
-	private void inicializarDatosProductos() {
+	public void inicializarDatos() {
 
 		marketplace = new Marketplace();
 
-        Producto producto = new Producto();
-        producto.setCategoria("Hogar");
-        producto.setNombre("Alfombra");
-        producto.setImagen("C:\\td\\Imagenes\\alfombra.jpg");
-        producto.setPrecio(20000);
-        producto.setEstadoProducto(EstadoProducto.PUBLICADO);
-        marketplace.getListaProductos().add(producto);
+		
+        Producto producto1 = new Producto();
+        producto1.setCategoria("Hogar");
+        producto1.setNombre("Alfombra");
+        producto1.setImagen("C:\\td\\Imagenes\\alfombra.jpg");
+        producto1.setPrecio(20000);
+        producto1.setEstadoProducto(EstadoProducto.PUBLICADO);
+        Vendedor vendedor1 = new Vendedor();
+        vendedor1.setNombre("Alejandro");
+        vendedor1.setApellido("Barragán");
+        vendedor1.setCedula("1003496468");
+        vendedor1.setDireccion("Armenia");
+        vendedor1.setImagen("C:\\td\\Imagenes\\1.jpg");
+        vendedor1.setUsuario("alejandro");
+        vendedor1.setContrasena("aaa");
+        vendedor1.getListaProductos().add(producto1);
+        marketplace.getListaVendedores().add(vendedor1);
 
-        producto = new Producto();
-        producto.setCategoria("Hogar");
-        producto.setNombre("Aspiradora");
-        producto.setImagen("C:\\td\\Imagenes\\aspiradora.jpg");
-        producto.setPrecio(30000);
-        producto.setEstadoProducto(EstadoProducto.VENDIDO);
-        marketplace.getListaProductos().add(producto);
+        Producto producto2 = new Producto();
+        producto2.setCategoria("Hogar");
+        producto2.setNombre("Aspiradora");
+        producto2.setImagen("C:\\td\\Imagenes\\aspiradora.jpg");
+        producto2.setPrecio(30000);
+        producto2.setEstadoProducto(EstadoProducto.VENDIDO);
+        Vendedor vendedor2 = new Vendedor();
+        vendedor2.setNombre("Jhon");
+        vendedor2.setApellido("Bello");
+        vendedor2.setCedula("10054348");
+        vendedor2.setDireccion("Calarca");
+        vendedor2.setImagen("C:\\td\\Imagenes\\2.jpg");
+        vendedor2.setUsuario("jhon");
+        vendedor2.setContrasena("bbb");
+        vendedor2.getListaProductos().add(producto2);
+        marketplace.getListaVendedores().add(vendedor2);
 
-        producto = new Producto();
-        producto.setCategoria("Herramientas");
-        producto.setNombre("Martillo");
-        producto.setImagen("C:\\td\\Imagenes\\martillo.jpg");
-        producto.setPrecio(40000);
-        producto.setEstadoProducto(EstadoProducto.CANCELADO);
-        marketplace.getListaProductos().add(producto);
+        Producto producto3 = new Producto();
+        producto3.setCategoria("Herramientas");
+        producto3.setNombre("Martillo");
+        producto3.setImagen("C:\\td\\Imagenes\\martillo.jpg");
+        producto3.setPrecio(40000);
+        producto3.setEstadoProducto(EstadoProducto.CANCELADO);
+        Vendedor vendedor3 = new Vendedor();
+        vendedor3.setNombre("Carlos");
+        vendedor3.setApellido("Ortegon");
+        vendedor3.setCedula("1006543");
+        vendedor3.setDireccion("Armenia");
+        vendedor3.setImagen("C:\\td\\Imagenes\\3.jpg");
+        vendedor3.setUsuario("carlos");
+        vendedor3.setContrasena("ccc");
+        vendedor3.getListaProductos().add(producto3);
+        marketplace.getListaVendedores().add(vendedor3);
 
         System.out.println("Marketplace inicializado "+ marketplace);
 	}
@@ -110,32 +126,58 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 
 	@Override
 	public Producto crearProducto(String nombre, String categoria, double precio,
-			EstadoProducto estadoProducto, String pathImagen) {
+			EstadoProducto estadoProducto, String pathImagen, Vendedor vendedor) {
 		
 		Producto producto = null;
 		
 		try {
-			producto = getMarketplace().crearProducto(nombre, categoria, precio, estadoProducto, pathImagen);
+			producto = getMarketplace().crearProducto(nombre, categoria, precio, estadoProducto, pathImagen,vendedor);
 		} catch (ProductoException e) {
 			e.getMessage();
 		}
 		return producto;
 	}
+	
+	public ArrayList<Producto> obtenerPublicacion(Vendedor vendedor) {
+		return vendedor.getListaPublicaciones();
+	}
+	
+	public Producto crearPublicacion(String nombre, String categoria, Double precio, EstadoProducto estadoProducto,
+			String pathImagen, Vendedor vendedor) throws ProductoException {
+		Producto productoAPublicar;
+		productoAPublicar = getMarketplace().crearPublicacion(nombre, categoria, precio, estadoProducto, pathImagen, vendedor);
+		return productoAPublicar;
+	}
 
+	public boolean agregarPublicacion(Vendedor vendedorPrincipal, Producto productoSeleccionado) {
+		boolean nuevaPublicacion=false;
+		
+		ArrayList<Vendedor>listaVendedores = getMarketplace().getListaVendedores();
+
+		for (Vendedor vendedor2 : listaVendedores) {
+			
+			if (vendedorPrincipal.getCedula().equals(vendedor2.getCedula())){
+				vendedorPrincipal.getListaPublicaciones().add(productoSeleccionado);
+				nuevaPublicacion=true;
+			}
+		}
+		return nuevaPublicacion;
+	}
+	
 	@Override
 	public boolean actualizarProducto(String nombreActual, String nombre, String categoria, double precio,
-			EstadoProducto estadoProducto) {
+			EstadoProducto estadoProducto, Vendedor vendedor) {
 		
-		return getMarketplace().actualizarProducto(nombreActual, nombre, categoria, precio, estadoProducto);
+		return getMarketplace().actualizarProducto(nombreActual, nombre, categoria, precio, estadoProducto, vendedor);
 		
 	}
 
 	@Override
-	public Boolean eliminarProducto(String nombre) {
+	public Boolean eliminarProducto(String nombre, Vendedor vendedor) {
 		
 		boolean flagProductoExiste = false;
 		try {
-			flagProductoExiste = getMarketplace().eliminarProducto(nombre);
+			flagProductoExiste = getMarketplace().eliminarProducto(nombre, vendedor);
 		} catch (ProductoException e) {
 			e.getMessage();
 		}
@@ -150,8 +192,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 	}
 	
 	@Override
-	public ArrayList<Producto> obtenerProductos() {
-		return marketplace.getListaProductos();
+	public ArrayList<Producto> obtenerProductos(Vendedor vendedor) {
+		return vendedor.getListaProductos();
 	}
 	
 	public Vendedor crearVendedor(String nombre, String apellido, String cedula, String direccion, String pathImage, String usuario, String contrasena) {
@@ -328,6 +370,12 @@ public class ModelFactoryController implements IModelFactoryService, Runnable{
 			Persistencia.guardarRecursoMarketplaceXML(marketplace);
 		}
 	}
+
+	
+
+	
+
+	
 
 	
 

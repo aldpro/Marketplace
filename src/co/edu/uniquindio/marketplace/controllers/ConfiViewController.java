@@ -258,6 +258,7 @@ public class ConfiViewController {
 	public void refrescarTab(){
 		if (usuario.getRol().equals("vendedor")){
 			tabPane.getTabs().remove(0);
+			tabPane.getTabs().remove(0);
 		}
 		
 	}

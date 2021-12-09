@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import co.edu.uniquindio.marketplace.Aplicacion;
+import co.edu.uniquindio.marketplace.exceptions.ProductoException;
 import co.edu.uniquindio.marketplace.exceptions.SolicitudVendedorException;
 import co.edu.uniquindio.marketplace.model.Producto;
 import co.edu.uniquindio.marketplace.model.EstadoProducto;
@@ -38,6 +39,7 @@ public class VendedorViewController {
         ObservableList <Producto> listaProductosData = FXCollections.observableArrayList();
         ObservableList<Vendedor> listaSolicitudesData = FXCollections.observableArrayList();
         ObservableList<Vendedor> listaVendedoresAsociadosData = FXCollections.observableArrayList();
+        ObservableList<Producto> listaPublicacionesData = FXCollections.observableArrayList();
         Producto productoSeleccionado;
         
         FilteredList<Producto> filtrarDatosProducto;
@@ -47,6 +49,7 @@ public class VendedorViewController {
         private Vendedor vendedor;
         private Vendedor vendedorNoAsociadoSeleccionado;
         private Vendedor solicitudSeleccionado;
+        private Producto publicacionSeleccionada;
 
         @FXML
         private TabPane tabPane;
@@ -244,11 +247,12 @@ public class VendedorViewController {
         
         //PUBLICAR PRODUCTO------------------------------------------------------------------------------------------------------------------------
         @FXML
-        void PublicarProductoAction(ActionEvent event) {
-                crearProducto();
+        void publicarProductoAction(ActionEvent event) {
+                publicarProducto();
+                refrescarMuro();
         }
 
-        //CREAR- Aï¿½ADIR PRODUCTO-----------------------------------------------------------------------------------------------------------
+		//CREAR- AÑADIR PRODUCTO-----------------------------------------------------------------------------------------------------------
 
         @FXML
         void addProductoAction(ActionEvent event) {
@@ -328,14 +332,43 @@ public class VendedorViewController {
                 modelFactoryController = ModelFactoryController.getInstance();
                 crudProductoViewController = new CrudProductoViewController(modelFactoryController);
                 crudVendedorViewController = new CrudVendedorViewController(modelFactoryController);
-                inicializarProductoView();
+
 //                colocarImagenBoton();
 //                btnMeGusta.setDisable(true);
                 
         }
 
+        private void inicializarPublicaciones(){
+        	this.columnNombreMuro.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        	this.columnCategoriaMuro.setCellValueFactory(new PropertyValueFactory<>("categoria"));
+        	this.columnPrecioMuro.setCellValueFactory(new PropertyValueFactory<>("precio"));
+        	this.columnEstadoMuro.setCellValueFactory(new PropertyValueFactory<>("estadoProducto"));
+        	this.columnFechaPublicacion.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        	tableMuro.getItems().clear();
+            tableMuro.setItems(getListaPublicacionesData());
+            
+            tableMuro.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) ->{
+                publicacionSeleccionada = newSelection;
+                FileInputStream inputStream;
+                try {
+                        inputStream = new FileInputStream(publicacionSeleccionada.getImagen());
+                        Image image =new Image(inputStream);
+                        pathImagen = publicacionSeleccionada.getImagen();
+                        mostrarInformacionPublicacion(publicacionSeleccionada, image);
+                } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                }
+        });
+        }
 
-        private void inicializarVendedoresAsociados() {
+        private void mostrarInformacionPublicacion(Producto publicacionSeleccionada2, Image image) {
+        	if(productoSeleccionado != null) {
+                ivImagenProductoMuro.setImage(image);
+        }
+			
+		}
+
+		private void inicializarVendedoresAsociados() {
         	this.clNombreVendedorAsociado.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         	this.clApellidoVendedorAsociado.setCellValueFactory(new PropertyValueFactory<>("apellido"));
         	tableAsociados.getItems().clear();
@@ -447,7 +480,7 @@ public class VendedorViewController {
         }
 
         public ObservableList<Producto> getListaProductosData() {
-                listaProductosData.addAll(crudProductoViewController.obtenerProductos());
+                listaProductosData.addAll(crudProductoViewController.obtenerProductos(vendedor));
                 return listaProductosData;
         }
 
@@ -506,15 +539,19 @@ public class VendedorViewController {
 			this.listaVendedoresAsociadosData = listaVendedoresAsociadosData;
 		}
 		
+		public ObservableList<Producto> getListaPublicacionesData() {
+			listaPublicacionesData.addAll(crudProductoViewController.obtenerPublicacion(vendedor));
+			return listaPublicacionesData;
+		}
+
+		public void setListaPublicacionesData(ObservableList<Producto> listaPublicacionesData) {
+			this.listaPublicacionesData = listaPublicacionesData;
+		}
+		
+		
+		
         //----------------------------------------------------------------------------------------------------------------------------------
 
-		
-
-		
-
-		
-
-		
 
 		private void limpiarCamposProducto() {
                 txtNombreProducto.setText("");
@@ -566,10 +603,6 @@ public class VendedorViewController {
                 if(estadoProducto == null)
                         mensaje += "El estado del producto es invalido \n" ;
 
-                if (pathImagen == null){
-                        mensaje += "La imagen es invalida \n";
-                }
-
                 if(mensaje.equals("")){
                         return true;
                 }else{
@@ -591,7 +624,7 @@ public class VendedorViewController {
                 if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
 
                         Producto producto = null;
-                        producto = crudProductoViewController.crearProducto(nombre, categoria, precio, estadoProducto, pathImagen);
+                        producto = crudProductoViewController.crearProducto(nombre, categoria, precio, estadoProducto, pathImagen,vendedor);
 
                         if (producto != null) {
                                 listaProductosData.add(producto);
@@ -616,7 +649,7 @@ public class VendedorViewController {
 
                         if(mostrarMensajeConfirmacion("¿Está seguro de eliminar el producto seleccionado?")== true) {
 
-                                productoEliminado = crudProductoViewController.eliminarProducto(productoSeleccionado.getNombre());
+                                productoEliminado = crudProductoViewController.eliminarProducto(productoSeleccionado.getNombre(),vendedor);
 
                                 if(productoEliminado == true ) {
                                         listaProductosData.remove(productoSeleccionado);
@@ -627,7 +660,7 @@ public class VendedorViewController {
                                         limpiarCamposProducto();
                                         mostrarMensaje("Notificación de producto", "Producto eliminado", "El producto se ha eliminado con exito", AlertType.INFORMATION);
                                 }else {
-                                        mostrarMensaje("Notificación de producto", "Producto no eliminado", "El producto no se puede eliminado con exito", AlertType.ERROR);
+                                        mostrarMensaje("Notificación de producto", "Producto no eliminado", "El producto no se pudo eliminar con exito", AlertType.ERROR);
                                 }
 
                         }
@@ -654,7 +687,7 @@ public class VendedorViewController {
                         //3. Validar la informaciï¿½n
                         if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
 
-                                productoActualizado = crudProductoViewController.actualizarProducto(productoSeleccionado.getNombre(), nombre, categoria, precio, estadoProducto);
+                                productoActualizado = crudProductoViewController.actualizarProducto(productoSeleccionado.getNombre(), nombre, categoria, precio, estadoProducto, vendedor);
 
 
                                 if (productoActualizado == true) {
@@ -676,8 +709,8 @@ public class VendedorViewController {
         private void nuevoProducto() {
                 mostrarMensaje("Notificacion Producto", "Nuevo Producto", "Ingrese los datos del nuevo producto en los campos correspondientes, luego oprima <añadir producto>.", AlertType.INFORMATION);
                 limpiarCamposProducto();
-
         }
+        
         public void refrescarVendedoresNoAsociados(){
         	inicializarVendedoresNoAsociados();
         }
@@ -693,12 +726,15 @@ public class VendedorViewController {
             inicializarVendedoresNoAsociados();
             inicializarSolicitudesVendedores();
             inicializarVendedoresAsociados();
-            
+            inicializarPublicaciones();
+            inicializarProductoView();
         }
 
 		public void refrescarListaSolicitudes() {
 			inicializarSolicitudesVendedores();
-			
+		}
+		public void refrescarMuro() {
+			inicializarPublicaciones();
 		}
 		
 		private void aceptarSolicitud() {
@@ -706,7 +742,7 @@ public class VendedorViewController {
 			boolean solicitudAceptada= false;
 			if (solicitudSeleccionado!=null){
 				solicitudAceptada = crudVendedorViewController.aceptarSolicitud(vendedor, solicitudSeleccionado);
-				
+				crudVendedorViewController.guardarDatos();
 				if (solicitudAceptada==true){
 					tableAsociados.refresh();
 					tableSolicitudes.refresh();
@@ -728,6 +764,7 @@ public class VendedorViewController {
         	boolean solicitudRechazada = false;
         	if (solicitudSeleccionado!=null){
 				solicitudRechazada = crudVendedorViewController.rechazarSolicitud(vendedor, solicitudSeleccionado);
+				crudVendedorViewController.guardarDatos();
 				
 				if (solicitudRechazada==true){
 					tableAsociados.refresh();
@@ -740,7 +777,46 @@ public class VendedorViewController {
 				  mostrarMensaje("Notificación de Tabla", "Vendedor no seleccionado", "Seleccione un Vendedor de la lista", AlertType.WARNING);
 			}
 			
-		}
+        }
 
+        private void publicarProducto() {
+        	
+        	 //1. Capturar los datos
+            String nombre = txtNombreProducto.getText();
+            String categoria = txtCategoriaProducto.getText();
+            Double precio = Double.parseDouble(txtPrecioProducto.getText());
+            EstadoProducto estadoProducto = cbEstadoProducto.getValue();
+            boolean nuevoProducto = false;
+
+            //2. Validar la informacion
+            if (datosValidos(nombre, categoria, precio, estadoProducto, pathImagen) == true) {
+
+            	Producto producto = null;
+            	try {
+            		producto = crudProductoViewController.crearPublicacion(nombre, categoria, precio, estadoProducto, pathImagen,vendedor);
+            		if (producto != null) {
+            			listaPublicacionesData.add(producto);
+            			crudProductoViewController.guardarDatos();
+            			crudProductoViewController.registrarAccion("El producto se ha publicado con exito",1,"Publicar producto");
+            			mostrarMensaje("Notificacion de producto", "Producto publicado", "El producto se ha publicado con exito", AlertType.INFORMATION);
+            			limpiarCamposProducto();
+                    }else {
+                    	if (productoSeleccionado!=null){
+                        	nuevoProducto = crudProductoViewController.agregarPublicacion(vendedor,productoSeleccionado);
+                        	if (nuevoProducto==true){
+                        		tableMuro.refresh();
+                        	}
+                        }
+                    	mostrarMensaje("Notificacion de producto", "Producto no publicado", "El producto no se ha publicado con exito", AlertType.INFORMATION);
+                    }
+            	} catch (ProductoException e) {
+				// TODO Auto-generated catch block
+            		e.printStackTrace();
+				}   
+            }else{
+                    mostrarMensaje("Notificacion de producto", "Producto no publicado", "Los datos ingresados son invalidos", AlertType.ERROR);
+            }
+            
+		}
 }
 

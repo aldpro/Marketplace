@@ -111,24 +111,25 @@
             </Label>
             <Separator layoutX="304.0" layoutY="53.0" prefHeight="3.0" prefWidth="1063.0" />
             <Separator layoutX="301.0" orientation="VERTICAL" prefHeight="326.0" prefWidth="6.0" />
-            <Separator layoutX="448.0" layoutY="322.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="6.0" />
+            <Separator layoutX="493.0" layoutY="324.0" orientation="VERTICAL" prefHeight="375.0" prefWidth="6.0" />
             <Label layoutX="22.0" layoutY="330.0" text="Muro de publicaciones:">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="tableMuro" layoutX="51.0" layoutY="439.0" prefHeight="170.0" prefWidth="368.0">
+            <TableView fx:id="tableMuro" layoutX="22.0" layoutY="439.0" prefHeight="170.0" prefWidth="451.0">
               <columns>
                 <TableColumn fx:id="columnNombreMuro" prefWidth="103.0" text="Nombre" />
                 <TableColumn fx:id="columnCategoriaMuro" prefWidth="97.0" text="Categoría" />
                   <TableColumn fx:id="columnPrecioMuro" prefWidth="85.0" text="Precio" />
                   <TableColumn fx:id="columnEstadoMuro" prefWidth="83.0" text="Estado" />
+                  <TableColumn fx:id="columnFechaPublicacion" prefWidth="82.0" text="Fecha de publicación" />
               </columns>
             </TableView>
             <Button fx:id="btnMeGusta" layoutX="261.0" layoutY="634.0" mnemonicParsing="false" onAction="#darMeGustaAction" text="Me gusta" />
             <ImageView fx:id="ivImagenProductoMuro" fitHeight="92.0" fitWidth="160.0" layoutX="236.0" layoutY="334.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="btnComentar" layoutX="113.0" layoutY="634.0" mnemonicParsing="false" onAction="#comentarAction" text="Comentar" />
-            <Button fx:id="btnPublicarProducto" layoutX="1114.0" layoutY="574.0" mnemonicParsing="false" onAction="#PublicarProductoAction" prefHeight="25.0" prefWidth="120.0" text="Publicar" />
+            <Button fx:id="btnPublicarProducto" layoutX="1114.0" layoutY="574.0" mnemonicParsing="false" onAction="#publicarProductoAction" prefHeight="25.0" prefWidth="120.0" text="Publicar" />
                             </children>
                         </AnchorPane>
     </children>
